@@ -1,0 +1,9 @@
+.btn_set_image {
+    -fx-background-color: transparent;
+}
+
+.btn_set_image:hover {
+    -fx-background-color: #cecece;
+    -fx-opacity: 0.2;
+    -fx-cursor: hand;
+}
