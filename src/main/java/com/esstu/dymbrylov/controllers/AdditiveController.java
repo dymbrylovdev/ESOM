@@ -1,31 +1,29 @@
 package com.esstu.dymbrylov.controllers;
 
-import com.esstu.dymbrylov.services.MaterialService;
+import com.esstu.dymbrylov.services.AdditiveService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
-import javax.swing.*;
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 
 
-public class MaterialController extends MaterialService implements Initializable {
+public class AdditiveController extends AdditiveService implements Initializable {
     ModalController modalWindow = new ModalController();
 
     @FXML
-    private TextField text_material;
+    private TextField text_additive;
+
     @FXML
-    private void setNameAndSetData() {
-        Map.Entry<Boolean, String> response = setMaterialByName(text_material.getText());
+    public void getNameAndSetData() {
+        Map.Entry<Boolean, String> response = setAdditiveByName(text_additive.getText());
         if (response.getKey()){
             modalWindow.showAlertInformation(response.getValue());
         }else {
             modalWindow.showAlertWarning(response.getValue());
         }
-//        JOptionPane.showMessageDialog(null, response.getValue());
-
     }
 
     @Override

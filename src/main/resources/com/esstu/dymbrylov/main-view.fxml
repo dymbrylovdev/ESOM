@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -15,11 +14,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE" tabMinWidth="100.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esstu.dymbrylov.MainController">
+<TabPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE" tabMinWidth="100.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esstu.dymbrylov.MainController">
     <tabs>
-        <Tab text="Форма">
+        <Tab fx:id="form_root" text="Форма" >
             <content>
-                <AnchorPane fx:id="form_root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0">
+                <AnchorPane fx:id="form_pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0">
                     <children>
                         <Accordion layoutX="684.0" layoutY="14.0">
                             <panes>
@@ -28,7 +27,7 @@
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                             <children>
                                                 <ImageView fx:id="img_1" fitHeight="180.0" fitWidth="200.0" layoutX="1.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
-                                                <Button fx:id="button_img_1" onAction="#setImag" layoutX="-1.0" layoutY="-2.0" mnemonicParsing="false" prefHeight="180.0" prefWidth="200.0" styleClass="btn_set_image" stylesheets="@style/form-style.css" text="Выберите фото" />
+                                                <Button fx:id="button_img_1" layoutX="-1.0" layoutY="-2.0" mnemonicParsing="false" onAction="#setImag" prefHeight="180.0" prefWidth="200.0" styleClass="btn_set_image" stylesheets="@style/form-style.css" text="Выберите фото" />
                                             </children>
                                         </AnchorPane>
                                     </content>
@@ -38,7 +37,7 @@
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                             <children>
                                                 <ImageView fx:id="img_2" fitHeight="180.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                                                <Button fx:id="button_img_2" onAction="#setImag" mnemonicParsing="false" prefHeight="180.0" prefWidth="200.0" styleClass="btn_set_image" stylesheets="@style/form-style.css" text="Выберите фото" />
+                                                <Button fx:id="button_img_2" mnemonicParsing="false" onAction="#setImag" prefHeight="180.0" prefWidth="200.0" styleClass="btn_set_image" stylesheets="@style/form-style.css" text="Выберите фото" />
                                             </children>
                                         </AnchorPane>
                                     </content>
@@ -48,7 +47,7 @@
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                             <children>
                                                 <ImageView fx:id="img_3" fitHeight="180.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                                                <Button fx:id="button_img_3" onAction="#setImag" mnemonicParsing="false" prefHeight="180.0" prefWidth="200.0" styleClass="btn_set_image" stylesheets="@style/form-style.css" text="Выберите фото" />
+                                                <Button fx:id="button_img_3" mnemonicParsing="false" onAction="#setImag" prefHeight="180.0" prefWidth="200.0" styleClass="btn_set_image" stylesheets="@style/form-style.css" text="Выберите фото" />
                                             </children>
                                         </AnchorPane>
                                     </content>
@@ -58,49 +57,45 @@
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                             <children>
                                                 <ImageView fx:id="img_4" fitHeight="180.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                                                <Button fx:id="button_img_4" onAction="#setImag" mnemonicParsing="false" prefHeight="180.0" prefWidth="200.0" styleClass="btn_set_image" stylesheets="@style/form-style.css" text="Выберите фото" />
+                                                <Button fx:id="button_img_4" mnemonicParsing="false" onAction="#setImag" prefHeight="180.0" prefWidth="200.0" styleClass="btn_set_image" stylesheets="@style/form-style.css" text="Выберите фото" />
                                             </children>
                                         </AnchorPane>
                                     </content>
                                 </TitledPane>
                             </panes>
                         </Accordion>
-                        <TextField fx:id="number_obrazca" layoutX="187.0" layoutY="15.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="212.0" />
-                        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="17.0" layoutY="10.0" prefHeight="39.0" prefWidth="150.0" styleClass="def-text" stylesheets="@style/form-style.css" text="  Номер образца :" />
-                        <Label alignment="CENTER_RIGHT" layoutX="17.0" layoutY="68.0" prefHeight="39.0" prefWidth="150.0" text="           Материал :" />
-                        <TextField fx:id="sloi" layoutX="187.0" layoutY="125.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="212.0" />
-                        <Label alignment="CENTER_RIGHT" layoutX="17.0" layoutY="120.0" prefHeight="39.0" prefWidth="150.0" text="                   Слои :" />
-                        <Label alignment="CENTER_RIGHT" layoutX="17.0" layoutY="191.0" prefHeight="39.0" prefWidth="150.0" text="           Добавка :" />
-                        <TextField fx:id="procent" layoutX="187.0" layoutY="258.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="212.0" />
-                        <Label alignment="CENTER_RIGHT" layoutX="17.0" layoutY="254.0" prefHeight="39.0" prefWidth="150.0" text="Процент содержания :" />
-                        <ComboBox fx:id="material_select" layoutX="184.0" layoutY="73.0" prefHeight="26.0" prefWidth="219.0" promptText="Выбирите материал" />
-                        <MenuButton fx:id="dobavca_select" layoutX="184.0" layoutY="196.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="219.0" text="Выберите добавку " />
+                        <TextField fx:id="id" layoutX="34.0" layoutY="24.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="230.0" promptText="Номер образца" />
+                        <TextField fx:id="layer_count" layoutX="34.0" layoutY="132.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="230.0" promptText="Количество слоев" />
+                        <TextField fx:id="procent" layoutX="34.0" layoutY="238.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="230.0" promptText="Процент содержания" />
+                        <ComboBox fx:id="material_select" layoutX="34.0" layoutY="78.0" prefHeight="26.0" prefWidth="230.0" promptText="Выбирите материал" />
                         <Button fx:id="save_form" layoutX="725.0" layoutY="491.0" mnemonicParsing="false" onMouseClicked="#clickBtnSaveForm" prefHeight="42.0" prefWidth="121.0" text="Сохранить" />
-                        <Button fx:id="add_material_button" layoutX="434.0" layoutY="71.0" minWidth="24.0" mnemonicParsing="false" onAction="#clickBtnAddMaterial" prefHeight="30.0" prefWidth="59.0" text="+">
+                        <Button fx:id="add_material_button" layoutX="271.0" layoutY="182.0" minWidth="24.0" mnemonicParsing="false" onAction="#clickBtnAddMaterial" prefHeight="30.0" prefWidth="59.0" text="+">
                             <stylesheets>
                             </stylesheets>
                         </Button>
-                        <Button fx:id="add_dobavca_button" layoutX="434.0" layoutY="194.0" minWidth="24.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="59.0" text="+" />
+                        <Button layoutX="271.0" layoutY="76.0" minWidth="24.0" mnemonicParsing="false" onAction="#clickBtnAddAdditive" prefHeight="30.0" prefWidth="59.0" text="+" />
                   <Label fx:id="bdInfo" alignment="CENTER" layoutX="34.0" layoutY="493.0" prefHeight="39.0" prefWidth="267.0" />
+                  <ComboBox fx:id="additive_select" layoutX="34.0" layoutY="184.0" prefHeight="26.0" prefWidth="230.0" promptText="Выбирите материал" />
+                  <Button layoutX="493.0" layoutY="491.0" mnemonicParsing="false" onAction="#testclick" prefHeight="42.0" prefWidth="121.0" text="Сохранить" />
                     </children>
                 </AnchorPane>
             </content>
         </Tab>
-        <Tab text="Данные">
+        <Tab fx:id="data_tab" text="Данные">
             <content>
                 <AnchorPane prefHeight="200.0" prefWidth="200.0">
                     <children>
                         <TextField layoutX="169.0" layoutY="30.0" prefHeight="26.0" prefWidth="257.0" />
                         <Button layoutX="457.0" layoutY="28.0" mnemonicParsing="false" text="Button" />
                         <Label layoutX="28.0" layoutY="34.0" text="Искать по номеру" />
-                        <Pagination layoutY="78.0" prefHeight="468.0" prefWidth="894.0" />
-                        <TableView layoutX="10.0" layoutY="75.0" prefHeight="414.0" prefWidth="885.0">
+                        <Pagination fx:id="dataPagination" layoutY="78.0" prefHeight="468.0" prefWidth="894.0" />
+                        <TableView fx:id="formTableView" layoutX="10.0" layoutY="75.0" prefHeight="414.0" prefWidth="885.0">
                             <columns>
-                                <TableColumn prefWidth="124.0" text="Номер образца" />
-                                <TableColumn minWidth="0.0" prefWidth="195.0" text="Материал" />
-                                <TableColumn minWidth="0.0" prefWidth="116.0" text="Слои" />
-                                <TableColumn minWidth="0.0" prefWidth="230.0" text="Добавка" />
-                                <TableColumn minWidth="0.0" prefWidth="233.0" text="Процент содержания" />
+                                <TableColumn fx:id="id_table" prefWidth="124.0" text="Номер образца" />
+                                <TableColumn fx:id="id_material_table" minWidth="0.0" prefWidth="195.0" text="Материал" />
+                                <TableColumn fx:id="id_additive_table" minWidth="0.0" prefWidth="230.0" text="Добавка" />
+                                <TableColumn fx:id="layer_count_table" minWidth="0.0" prefWidth="116.0" text="Слои" />
+                                <TableColumn fx:id="percent_table" minWidth="0.0" prefWidth="233.0" text="Процент содержания" />
                             </columns>
                         </TableView>
                     </children>

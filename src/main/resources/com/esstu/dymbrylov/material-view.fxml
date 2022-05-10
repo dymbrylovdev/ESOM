@@ -4,11 +4,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="141.0" prefWidth="409.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esstu.dymbrylov.controllers.MaterialController">
+<AnchorPane prefHeight="141.0" prefWidth="409.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esstu.dymbrylov.controllers.MaterialController">
    <children>
       <AnchorPane layoutX="3.0" prefHeight="141.0" prefWidth="402.0">
          <children>
-            <Button fx:id="btn_add_material" layoutX="289.0" layoutY="57.0" mnemonicParsing="false" text="Добавить" onAction="#getNameAndSetData"/>
+            <Button fx:id="btn_add_material" layoutX="289.0" layoutY="57.0" mnemonicParsing="false" text="Добавить" onAction="#setNameAndSetData"/>
             <TextField fx:id="text_material" layoutX="41.0" layoutY="56.0" prefHeight="27.0" prefWidth="218.0" promptText="название" />
          </children>
       </AnchorPane>

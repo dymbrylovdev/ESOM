@@ -3,7 +3,7 @@ package com.esstu.dymbrylov.model;
 
 
 public class Samples {
-    private final Integer id;
+    private final String id;
     private final Integer id_material;
     private final Integer id_additive;
     private final String layer_count;
@@ -13,7 +13,7 @@ public class Samples {
     private final String photo_after_test;
     private final String photo_reverse;
 
-    public Samples(Integer id, Integer id_material, Integer id_additive, String layer_count, String percent, String photo_after, String photo_before, String photo_after_test, String photo_reverse) {
+    public Samples(String id, Integer id_material, Integer id_additive, String layer_count, String percent, String photo_after, String photo_before, String photo_after_test, String photo_reverse) {
         this.id = id;
         this.id_material = id_material;
         this.id_additive = id_additive;
@@ -25,7 +25,7 @@ public class Samples {
         this.photo_reverse = photo_reverse;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
