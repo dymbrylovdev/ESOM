@@ -1,4 +1,4 @@
-module com.esstu.dymbrylov.dymbrylov {
+module com.esstu.dymbrylov {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;

@@ -3,20 +3,31 @@ package com.esstu.dymbrylov;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import javax.swing.text.html.ImageView;
+
 public class DataTable {
 
-    private SimpleStringProperty id;
-    private SimpleIntegerProperty id_material;
-    private SimpleIntegerProperty id_additive;
-    private SimpleStringProperty layer_count;
-    private SimpleStringProperty percent;
+    private final SimpleStringProperty id;
+    private final SimpleIntegerProperty idMaterial;
+    private final SimpleIntegerProperty idAdditive;
+    private final SimpleStringProperty layerCount;
+    private final SimpleStringProperty percent;
 
-    public DataTable(String id, Integer id_material, Integer id_additive, String layer_count, String percent) {
+    private ImageView photoAfter;
+    private ImageView photoBefore;
+    private ImageView photoAfterTest;
+    private ImageView photoReverse;
+
+    public DataTable(String id, Integer id_material, Integer id_additive, String layer_count, String percent, ImageView photoAfter, ImageView photoBefore, ImageView photoAfterTest, ImageView photoReverse) {
         this.id = new SimpleStringProperty(id);
-        this.id_material = new SimpleIntegerProperty(id_material);
-        this.id_additive = new SimpleIntegerProperty(id_additive);
-        this.layer_count = new SimpleStringProperty(layer_count);
+        this.idMaterial = new SimpleIntegerProperty(id_material);
+        this.idAdditive = new SimpleIntegerProperty(id_additive);
+        this.layerCount = new SimpleStringProperty(layer_count);
         this.percent = new SimpleStringProperty(percent);
+        this.photoAfter = photoAfter;
+        this.photoBefore = photoBefore;
+        this.photoAfterTest = photoAfterTest;
+        this.photoReverse = photoReverse;
     }
 
     public String getId() {
@@ -31,40 +42,40 @@ public class DataTable {
         this.id.set(id);
     }
 
-    public int getId_material() {
-        return id_material.get();
+    public int getIdMaterial() {
+        return idMaterial.get();
     }
 
-    public SimpleIntegerProperty id_materialProperty() {
-        return id_material;
+    public SimpleIntegerProperty idMaterialProperty() {
+        return idMaterial;
     }
 
-    public void setId_material(int id_material) {
-        this.id_material.set(id_material);
+    public void setIdMaterial(int idMaterial) {
+        this.idMaterial.set(idMaterial);
     }
 
-    public int getId_additive() {
-        return id_additive.get();
+    public int getIdAdditive() {
+        return idAdditive.get();
     }
 
-    public SimpleIntegerProperty id_additiveProperty() {
-        return id_additive;
+    public SimpleIntegerProperty idAdditiveProperty() {
+        return idAdditive;
     }
 
-    public void setId_additive(int id_additive) {
-        this.id_additive.set(id_additive);
+    public void setIdAdditive(int idAdditive) {
+        this.idAdditive.set(idAdditive);
     }
 
-    public String getLayer_count() {
-        return layer_count.get();
+    public String getLayerCount() {
+        return layerCount.get();
     }
 
-    public SimpleStringProperty layer_countProperty() {
-        return layer_count;
+    public SimpleStringProperty layerCountProperty() {
+        return layerCount;
     }
 
-    public void setLayer_count(String layer_count) {
-        this.layer_count.set(layer_count);
+    public void setLayerCount(String layerCount) {
+        this.layerCount.set(layerCount);
     }
 
     public String getPercent() {
@@ -77,5 +88,37 @@ public class DataTable {
 
     public void setPercent(String percent) {
         this.percent.set(percent);
+    }
+
+    public ImageView getPhotoAfter() {
+        return photoAfter;
+    }
+
+    public void setPhotoAfter(ImageView photoAfter) {
+        this.photoAfter = photoAfter;
+    }
+
+    public ImageView getPhotoBefore() {
+        return photoBefore;
+    }
+
+    public void setPhotoBefore(ImageView photoBefore) {
+        this.photoBefore = photoBefore;
+    }
+
+    public ImageView getPhotoAfterTest() {
+        return photoAfterTest;
+    }
+
+    public void setPhotoAfterTest(ImageView photoAfterTest) {
+        this.photoAfterTest = photoAfterTest;
+    }
+
+    public ImageView getPhotoReverse() {
+        return photoReverse;
+    }
+
+    public void setPhotoReverse(ImageView photoReverse) {
+        this.photoReverse = photoReverse;
     }
 }

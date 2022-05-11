@@ -1,16 +1,24 @@
 package com.esstu.dymbrylov.services;
 
+import com.esstu.dymbrylov.MainApplication;
+import com.esstu.dymbrylov.MainController;
 import com.esstu.dymbrylov.controllers.ModalController;
 import com.esstu.dymbrylov.DataTable;
 import com.esstu.dymbrylov.model.Samples;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
 
+import javax.swing.text.Element;
+import javax.swing.text.html.ImageView;
+import java.net.URL;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 
 public class MainService {
     ModalController modalWindow = new ModalController();
@@ -103,18 +111,27 @@ public class MainService {
     }
 
 
-    public ObservableList<DataTable> getAllSamples() {
+    public ObservableList<DataTable> getAllSamples(int from, int to) {
         connect = ConnectorDB();
         ObservableList<DataTable> dataList = FXCollections.observableArrayList();
-        String query = "SELECT * from samples";
+        String query = "SELECT * from samples limit "+ from + "," + to;
         try  {
             preparedStatement = connect.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
             while(resultSet.next()) {
+                String url1 = resultSet.getString("photo_after");
+                String url2 = resultSet.getString("photo_before");
+                String url3 = resultSet.getString("photo_after_test");
+                String url4 = resultSet.getString("photo_reverse");
+                ImageView photo_after = Objects.equals(url1,"") ? null : new ImageView((Element) new Image(this.getClass().getResourceAsStream(url1)));
+                ImageView photo_before = Objects.equals(url2,"") ? null : new ImageView( (Element) new Image(this.getClass().getResourceAsStream(url2)));
+                ImageView photo_after_test = Objects.equals(url3,"") ? null : new ImageView( (Element) new Image(this.getClass().getResourceAsStream(url3)));
+                ImageView photo_reverse = Objects.equals(url4,"") ? null : new ImageView((Element) new Image(this.getClass().getResourceAsStream("")));
+
                 DataTable data = new DataTable(
                         resultSet.getString("id"), resultSet.getInt("id_material"),
                         resultSet.getInt("id_additive"), resultSet.getString("layer_count"),
-                        resultSet.getString("percent"));
+                        resultSet.getString("percent"), photo_after, photo_before, photo_after_test, photo_reverse);
                 dataList.add(data);
             }
         } catch (SQLException e) {
@@ -131,5 +148,36 @@ public class MainService {
             }
         }
         return dataList;
+    }
+
+
+
+    public Integer getCountPage() {
+        connect = ConnectorDB();
+        int count = 0;
+        try {
+            String query = "SELECT count(*) from samples";
+            preparedStatement = connect.prepareStatement(query);
+            resultSet = preparedStatement.executeQuery();
+            count = resultSet.getInt(1);
+        }catch (SQLException e) {
+            e.printStackTrace();
+            modalWindow.showError(e);
+        } finally {
+            if (connect != null) {
+                try {
+                    connect.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    modalWindow.showError(e);
+                }
+            }
+        }
+        return count;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(modalWindow);
     }
 }

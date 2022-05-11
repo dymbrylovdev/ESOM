@@ -2,7 +2,6 @@ package com.esstu.dymbrylov.services;
 
 import com.esstu.dymbrylov.controllers.ModalController;
 import com.esstu.dymbrylov.model.Additive;
-import com.esstu.dymbrylov.model.Material;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

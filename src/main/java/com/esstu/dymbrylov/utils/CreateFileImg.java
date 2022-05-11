@@ -1,25 +1,32 @@
 package com.esstu.dymbrylov.utils;
 
+import com.esstu.dymbrylov.MainApplication;
+import com.esstu.dymbrylov.MainController;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.StringReader;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.util.Map;
 
 public class CreateFileImg {
 
-    public Map.Entry<Boolean, String> saveImgInFolder(String path) {
+    public Map.Entry<Boolean, String> saveImgInFolder(String path)  {
         Map.Entry result = Map.entry(false, "");
-        String parent = "C:\\Users\\Gunga\\Desktop\\allProject\\dymbrylov\\src\\main\\resources\\com\\esstu\\dymbrylov\\";
+        String parent = MainController.class.getResource("").getPath();
         BufferedImage bImage = null;
         try {
             File initialImage = new File(path);
             bImage = ImageIO.read(initialImage);
-            File newFile = getUniqueFilePath(parent, "img\\", initialImage.getName());
-            Boolean resultSave = ImageIO.write(bImage, "jpg", newFile);
+            File newFile = getUniqueFilePath("~/", "img", initialImage.getName());
+            Boolean resultSave = ImageIO.write(bImage, "png", newFile);
 
             if (resultSave) {
-                result = Map.entry(true, newFile.getAbsolutePath());
+                result = Map.entry(true, newFile.toString());
             }
         } catch (IOException e) {
             System.out.println(e);

@@ -37,10 +37,19 @@ import java.util.*;
 public class MainController extends AdditiveService implements Initializable {
 
     @FXML
-    public TableView<DataTable> formTableView;
-
+    public TableColumn photoAfter;
     @FXML
-    public Pagination dataPagination;
+    public TableColumn photoBefore;
+    @FXML
+    public TableColumn photoAfterTest;
+    @FXML
+    public TableColumn photoReverse;
+    int from = 0, to = 0;
+    int itemPerPage = 10;
+    @FXML
+    public Pagination pagination;
+    @FXML
+    public TableView formTableView;
 
     @FXML
     private TableColumn<DataTable, String> id_table;
@@ -63,13 +72,14 @@ public class MainController extends AdditiveService implements Initializable {
 
 
     CreateFileImg createFileImg = new CreateFileImg();
-    private Map<String,String> mapPathImg = new HashMap<>();
+    private Map<String, String> mapPathImg = new HashMap<>();
     private static final String insertImgName = "Выберите фото";
+
     public MainController() {
-        mapPathImg.put("pathImg1","");
-        mapPathImg.put("pathImg2","");
-        mapPathImg.put("pathImg3","");
-        mapPathImg.put("pathImg4","");
+        mapPathImg.put("pathImg1", "");
+        mapPathImg.put("pathImg2", "");
+        mapPathImg.put("pathImg3", "");
+        mapPathImg.put("pathImg4", "");
     }
 
 
@@ -79,6 +89,7 @@ public class MainController extends AdditiveService implements Initializable {
     public Tab form_root;
     @FXML
     public AnchorPane form_pane;
+
     @FXML
     private Button add_dobavca_button;
 
@@ -199,7 +210,7 @@ public class MainController extends AdditiveService implements Initializable {
             path = path.replace("\\", "\\\\");
             Image image = new Image(file.toURI().toString(), 200, 180.0, false, true);
             button.setText("");
-            switch (button.getId()){
+            switch (button.getId()) {
                 case "button_img_1":
                     this.img_1.setImage(image);
                     mapPathImg.put("pathImg1", path);
@@ -226,9 +237,9 @@ public class MainController extends AdditiveService implements Initializable {
     public void clickBtnSaveForm() {
         Integer id_material = materialController.getMaterialByName(material_select.getValue());
         Integer id_additive = additiveController.getAdditiveByName(additive_select.getValue());
-        for (Map.Entry<String, String> entry: mapPathImg.entrySet()){
+        for (Map.Entry<String, String> entry : mapPathImg.entrySet()) {
             String newValue = createFileImg.saveImgInFolder(entry.getValue()).getValue();
-            mapPathImg.put(entry.getKey(),newValue);
+            mapPathImg.put(entry.getKey(), newValue);
         }
         Samples samples = new Samples(
                 id.getText(), id_material, id_additive,
@@ -239,50 +250,10 @@ public class MainController extends AdditiveService implements Initializable {
         Map.Entry<Boolean, String> response = setFormData(samples);
         if (response.getKey()) {
             modalWindow.showAlertInformation(response.getValue());
+            setDataInTable();
         } else {
             modalWindow.showAlertWarning(response.getValue());
         }
-
-    }
-    public int itemsPerPage() {
-        return 1;
-    }
-
-    public int rowsPerPage() {
-        return 5;
-    }
-
-    public VBox createPage(int pageIndex) {
-        ObservableList<DataTable> data = getAllSamples();
-        int lastIndex = 0;
-        int displace = data.size() % rowsPerPage();
-        if (displace > 0) {
-            lastIndex = data.size() / rowsPerPage();
-        } else {
-            lastIndex = data.size() / rowsPerPage() - 1;
-
-        }
-
-        VBox box = new VBox(5);
-        int page = pageIndex * itemsPerPage();
-
-        for (int i = page; i < page + itemsPerPage(); i++) {
-//            TableView<Person> table = new TableView<Person>();
-            id_table.setCellValueFactory(new PropertyValueFactory<DataTable, String>("id"));
-            id_material_table.setCellValueFactory(new PropertyValueFactory<DataTable, Integer>("id_material"));
-            id_additive_table.setCellValueFactory(new PropertyValueFactory<DataTable, Integer>("id_additive"));
-            layer_count_table.setCellValueFactory(new PropertyValueFactory<DataTable, String>("layer_count"));
-            percent_table.setCellValueFactory(new PropertyValueFactory<DataTable, String>("percent"));
-
-            if (lastIndex == pageIndex) {
-                formTableView.setItems(FXCollections.observableArrayList(data.subList(pageIndex * rowsPerPage(), pageIndex * rowsPerPage() + displace)));
-            } else {
-                formTableView.setItems(FXCollections.observableArrayList(data.subList(pageIndex * rowsPerPage(), pageIndex * rowsPerPage() + rowsPerPage())));
-            }
-
-            box.getChildren().add(formTableView);
-        }
-        return box;
 
     }
 
@@ -293,22 +264,33 @@ public class MainController extends AdditiveService implements Initializable {
 
     }
 
+    public Node createPage(Integer index) {
+        from = index * itemPerPage;
+        to = itemPerPage;
+        id_table.setCellValueFactory(new PropertyValueFactory<>("id"));
+        id_material_table.setCellValueFactory(new PropertyValueFactory<>("idMaterial"));
+        id_additive_table.setCellValueFactory(new PropertyValueFactory<>("idAdditive"));
+        layer_count_table.setCellValueFactory(new PropertyValueFactory<>("layerCount"));
+        photoAfter.setCellValueFactory(new PropertyValueFactory<>("photoAfter"));
+        photoBefore.setCellValueFactory(new PropertyValueFactory<>("photoBefore"));
+        photoAfterTest.setCellValueFactory(new PropertyValueFactory<>("photoAfterTest"));
+        photoReverse.setCellValueFactory(new PropertyValueFactory<>("photoReverse"));
+        formTableView.setItems(getAllSamples(from, to));
+        return formTableView;
+    }
 
+    public void setDataInTable() {
+        int count = getCountPage();
+
+        percent_table.setCellValueFactory(new PropertyValueFactory<>("percent"));
+        pagination.setPageCount((count/itemPerPage)+1);
+
+        pagination.setPageFactory(this::createPage);
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        dataPagination.setPageFactory(new Callback<Integer, Node>() {
-            @Override
-            public Node call(Integer pageIndex) {
-                if (pageIndex > getAllSamples().size() / rowsPerPage() + 1) {
-                    return null;
-                } else {
-                    return createPage(pageIndex);
-                }
-            }
-        });
-
-
+        setDataInTable();
         setListMaterial();
         setListAdditive();
         if (materialController.ConnectorDB() != null) {
