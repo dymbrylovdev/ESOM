@@ -114,26 +114,36 @@ public class MainService {
         ObservableList<DataTable> dataList = FXCollections.observableArrayList();
         String query = "SELECT * from samples limit "+ from + "," + to;
         try  {
+            int count = 1;
             preparedStatement = connect.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
             while(resultSet.next()) {
-                String url1 = resultSet.getString("photo_after");
-                String url2 = resultSet.getString("photo_before");
-                String url3 = resultSet.getString("photo_after_test");
-                String url4 = resultSet.getString("photo_reverse");
-                File file = new File(url4);
-                Image newImage = new Image(file.toURI().toURL().toString());
-                ImageView photo_after = Objects.equals(url1,"") ? null : new ImageView(new Image(this.getClass().getResourceAsStream(url1)));
-                ImageView photo_before = Objects.equals(url2,"") ? null : new ImageView(new Image(this.getClass().getResourceAsStream(url2)));
-                ImageView photo_after_test = Objects.equals(url3,"") ? null : new ImageView(new Image(this.getClass().getResourceAsStream(url3)));
-                ImageView photo_reverse = new ImageView(newImage);
+                File file1 = new File(resultSet.getString("photo_after"));
+                File file2 = new File(resultSet.getString("photo_before"));
+                File file3 = new File(resultSet.getString("photo_after_test"));
+                File file4 = new File(resultSet.getString("photo_reverse"));
+                Image newImage1 = new Image(new File(resultSet.getString("photo_after")).toURI().toURL().toString());
+                Image newImage2 = new Image( new File(resultSet.getString("photo_before")).toURI().toURL().toString());
+                Image newImage3= new Image(new File(resultSet.getString("photo_after_test")).toURI().toURL().toString());
+                Image newImage4 = new Image( new File(resultSet.getString("photo_reverse")).toURI().toURL().toString());
+                ImageView photo_after = new ImageView(newImage1);
+                photo_after.setFitWidth(200);
+                photo_after.setFitHeight(200);
+                ImageView photo_before = new ImageView(newImage2);
+                photo_before.setFitWidth(200);
+                photo_before.setFitHeight(200);
+                ImageView photo_after_test = new ImageView(newImage3);
+                photo_after_test.setFitWidth(200);
+                photo_after_test.setFitHeight(200);
+                ImageView photo_reverse = new ImageView(newImage4);
                 photo_reverse.setFitWidth(200);
                 photo_reverse.setFitHeight(200);
                 DataTable data = new DataTable(
-                        resultSet.getString("id"), resultSet.getInt("id_material"),
+                        count,resultSet.getString("id"), resultSet.getInt("id_material"),
                         resultSet.getInt("id_additive"), resultSet.getString("layer_count"),
                         resultSet.getString("percent"), photo_after, photo_before, photo_after_test, photo_reverse);
                 dataList.add(data);
+                count+=1;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -152,7 +162,6 @@ public class MainService {
         }
         return dataList;
     }
-
 
 
     public Integer getCountPage() {

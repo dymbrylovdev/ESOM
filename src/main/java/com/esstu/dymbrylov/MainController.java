@@ -35,7 +35,11 @@ import java.net.URL;
 import java.util.*;
 
 public class MainController extends AdditiveService implements Initializable {
+    int from = 0, to = 0;
+    int itemPerPage = 20;
 
+    @FXML
+    public TableColumn count;
     @FXML
     public TableColumn photoAfter;
     @FXML
@@ -44,8 +48,6 @@ public class MainController extends AdditiveService implements Initializable {
     public TableColumn photoAfterTest;
     @FXML
     public TableColumn photoReverse;
-    int from = 0, to = 0;
-    int itemPerPage = 10;
     @FXML
     public Pagination pagination;
     @FXML
@@ -208,7 +210,7 @@ public class MainController extends AdditiveService implements Initializable {
         if (file != null) {
             String path = file.getAbsolutePath();
             path = path.replace("\\", "\\\\");
-            Image image = new Image(file.toURI().toString(), 200, 180.0, false, true);
+            Image image = new Image(file.toURI().toString(), 288, 288, false, true);
             button.setText("");
             switch (button.getId()) {
                 case "button_img_1":
@@ -235,9 +237,9 @@ public class MainController extends AdditiveService implements Initializable {
 
     // Сохраниение формы
     public void clickBtnSaveForm() {
+        form_root.setDisable(true);
         Integer id_material = materialController.getMaterialByName(material_select.getValue());
         Integer id_additive = additiveController.getAdditiveByName(additive_select.getValue());
-
         for (Map.Entry<String, String> entry : mapPathImg.entrySet()) {
             String newValue = createFileImg.saveImgInFolder(entry.getValue()).getValue();
             mapPathImg.put(entry.getKey(), newValue);
@@ -252,8 +254,10 @@ public class MainController extends AdditiveService implements Initializable {
         if (response.getKey()) {
             modalWindow.showAlertInformation(response.getValue());
             setDataInTable();
+            form_root.setDisable(false);
         } else {
             modalWindow.showAlertWarning(response.getValue());
+            form_root.setDisable(false);
         }
 
     }
@@ -268,15 +272,17 @@ public class MainController extends AdditiveService implements Initializable {
     public Node createPage(Integer index) {
         from = index * itemPerPage;
         to = itemPerPage;
+        count.setCellValueFactory(new PropertyValueFactory<>("count"));
+        count.setPrefWidth(20);
         id_table.setCellValueFactory(new PropertyValueFactory<>("id"));
         id_material_table.setCellValueFactory(new PropertyValueFactory<>("idMaterial"));
         id_additive_table.setCellValueFactory(new PropertyValueFactory<>("idAdditive"));
         layer_count_table.setCellValueFactory(new PropertyValueFactory<>("layerCount"));
-        photoAfter.setPrefWidth(100);
+        photoAfter.setPrefWidth(200);
         photoAfter.setCellValueFactory(new PropertyValueFactory<>("photoAfter"));
-        photoBefore.setPrefWidth(100);
+        photoBefore.setPrefWidth(200);
         photoBefore.setCellValueFactory(new PropertyValueFactory<>("photoBefore"));
-        photoAfterTest.setPrefWidth(100);
+        photoAfterTest.setPrefWidth(200);
         photoAfterTest.setCellValueFactory(new PropertyValueFactory<>("photoAfterTest"));
         photoReverse.setPrefWidth(200);
         photoReverse.setCellValueFactory(new PropertyValueFactory<>("photoReverse"));
@@ -286,12 +292,14 @@ public class MainController extends AdditiveService implements Initializable {
 
     public void setDataInTable() {
         int count = getCountPage();
-
         percent_table.setCellValueFactory(new PropertyValueFactory<>("percent"));
         pagination.setPageCount((count/itemPerPage)+1);
-
         pagination.setPageFactory(this::createPage);
     }
+
+
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

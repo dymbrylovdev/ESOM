@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 
 public class DataTable {
 
+    private final SimpleIntegerProperty count;
     private final SimpleStringProperty id;
     private final SimpleIntegerProperty idMaterial;
     private final SimpleIntegerProperty idAdditive;
@@ -18,7 +19,8 @@ public class DataTable {
     private ImageView photoAfterTest;
     private ImageView photoReverse;
 
-    public DataTable(String id, Integer id_material, Integer id_additive, String layer_count, String percent, ImageView photoAfter, ImageView photoBefore, ImageView photoAfterTest, ImageView photoReverse) {
+    public DataTable(Integer count, String id, Integer id_material, Integer id_additive, String layer_count, String percent, ImageView photoAfter, ImageView photoBefore, ImageView photoAfterTest, ImageView photoReverse) {
+        this.count = new SimpleIntegerProperty(count);
         this.id = new SimpleStringProperty(id);
         this.idMaterial = new SimpleIntegerProperty(id_material);
         this.idAdditive = new SimpleIntegerProperty(id_additive);
@@ -30,6 +32,18 @@ public class DataTable {
         this.photoReverse = photoReverse;
     }
 
+
+    public int getCount() {
+        return count.get();
+    }
+
+    public SimpleIntegerProperty countProperty() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count.set(count);
+    }
     public String getId() {
         return id.get();
     }

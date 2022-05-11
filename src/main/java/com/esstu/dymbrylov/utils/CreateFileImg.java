@@ -1,16 +1,10 @@
 package com.esstu.dymbrylov.utils;
 
-import com.esstu.dymbrylov.MainApplication;
-import com.esstu.dymbrylov.MainController;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.io.StringReader;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Paths;
 import java.util.Map;
 
 public class CreateFileImg {
