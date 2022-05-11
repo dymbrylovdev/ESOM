@@ -2,8 +2,8 @@ package com.esstu.dymbrylov;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.image.ImageView;
 
-import javax.swing.text.html.ImageView;
 
 public class DataTable {
 

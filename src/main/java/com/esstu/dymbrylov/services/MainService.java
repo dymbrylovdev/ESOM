@@ -1,17 +1,15 @@
 package com.esstu.dymbrylov.services;
 
-import com.esstu.dymbrylov.MainApplication;
-import com.esstu.dymbrylov.MainController;
 import com.esstu.dymbrylov.controllers.ModalController;
 import com.esstu.dymbrylov.DataTable;
 import com.esstu.dymbrylov.model.Samples;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
-import javax.swing.text.Element;
-import javax.swing.text.html.ImageView;
-import java.net.URL;
+import java.io.File;
+import java.net.MalformedURLException;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -123,11 +121,14 @@ public class MainService {
                 String url2 = resultSet.getString("photo_before");
                 String url3 = resultSet.getString("photo_after_test");
                 String url4 = resultSet.getString("photo_reverse");
-                ImageView photo_after = Objects.equals(url1,"") ? null : new ImageView((Element) new Image(this.getClass().getResourceAsStream(url1)));
-                ImageView photo_before = Objects.equals(url2,"") ? null : new ImageView( (Element) new Image(this.getClass().getResourceAsStream(url2)));
-                ImageView photo_after_test = Objects.equals(url3,"") ? null : new ImageView( (Element) new Image(this.getClass().getResourceAsStream(url3)));
-                ImageView photo_reverse = Objects.equals(url4,"") ? null : new ImageView((Element) new Image(this.getClass().getResourceAsStream("")));
-
+                File file = new File(url4);
+                Image newImage = new Image(file.toURI().toURL().toString());
+                ImageView photo_after = Objects.equals(url1,"") ? null : new ImageView(new Image(this.getClass().getResourceAsStream(url1)));
+                ImageView photo_before = Objects.equals(url2,"") ? null : new ImageView(new Image(this.getClass().getResourceAsStream(url2)));
+                ImageView photo_after_test = Objects.equals(url3,"") ? null : new ImageView(new Image(this.getClass().getResourceAsStream(url3)));
+                ImageView photo_reverse = new ImageView(newImage);
+                photo_reverse.setFitWidth(200);
+                photo_reverse.setFitHeight(200);
                 DataTable data = new DataTable(
                         resultSet.getString("id"), resultSet.getInt("id_material"),
                         resultSet.getInt("id_additive"), resultSet.getString("layer_count"),
@@ -137,6 +138,8 @@ public class MainService {
         } catch (SQLException e) {
             e.printStackTrace();
             modalWindow.showError(e);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
         } finally {
             if (connect != null) {
                 try {

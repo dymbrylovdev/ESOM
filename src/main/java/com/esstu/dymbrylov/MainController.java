@@ -237,6 +237,7 @@ public class MainController extends AdditiveService implements Initializable {
     public void clickBtnSaveForm() {
         Integer id_material = materialController.getMaterialByName(material_select.getValue());
         Integer id_additive = additiveController.getAdditiveByName(additive_select.getValue());
+
         for (Map.Entry<String, String> entry : mapPathImg.entrySet()) {
             String newValue = createFileImg.saveImgInFolder(entry.getValue()).getValue();
             mapPathImg.put(entry.getKey(), newValue);
@@ -271,9 +272,13 @@ public class MainController extends AdditiveService implements Initializable {
         id_material_table.setCellValueFactory(new PropertyValueFactory<>("idMaterial"));
         id_additive_table.setCellValueFactory(new PropertyValueFactory<>("idAdditive"));
         layer_count_table.setCellValueFactory(new PropertyValueFactory<>("layerCount"));
+        photoAfter.setPrefWidth(100);
         photoAfter.setCellValueFactory(new PropertyValueFactory<>("photoAfter"));
+        photoBefore.setPrefWidth(100);
         photoBefore.setCellValueFactory(new PropertyValueFactory<>("photoBefore"));
+        photoAfterTest.setPrefWidth(100);
         photoAfterTest.setCellValueFactory(new PropertyValueFactory<>("photoAfterTest"));
+        photoReverse.setPrefWidth(200);
         photoReverse.setCellValueFactory(new PropertyValueFactory<>("photoReverse"));
         formTableView.setItems(getAllSamples(from, to));
         return formTableView;

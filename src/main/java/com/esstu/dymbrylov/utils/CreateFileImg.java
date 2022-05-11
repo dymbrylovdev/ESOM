@@ -17,12 +17,13 @@ public class CreateFileImg {
 
     public Map.Entry<Boolean, String> saveImgInFolder(String path)  {
         Map.Entry result = Map.entry(false, "");
-        String parent = MainController.class.getResource("").getPath();
+//        String parent = MainController.class.getResource("").getPath();
+        String parent = System.getProperty("user.dir");
         BufferedImage bImage = null;
         try {
             File initialImage = new File(path);
             bImage = ImageIO.read(initialImage);
-            File newFile = getUniqueFilePath("~/", "img", initialImage.getName());
+            File newFile = getUniqueFilePath(parent, "img", initialImage.getName());
             Boolean resultSave = ImageIO.write(bImage, "png", newFile);
 
             if (resultSave) {
