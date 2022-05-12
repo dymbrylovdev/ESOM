@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.Map;
 import java.util.Objects;
 
-public class MaterialService extends MainService{
+public class MaterialService extends SuperService{
     ModalController modalWindow = new ModalController();
 
     public MaterialService() {
@@ -85,8 +85,8 @@ public class MaterialService extends MainService{
         return response;
     }
 
-    public Integer getMaterialByName(String name) {
-        Integer idMaterial = null;
+    public Material getMaterialByName(String name) {
+        Material material = null;
         connect = ConnectorDB();
         String query = "SELECT * from material where name = ?";
         try {
@@ -95,7 +95,7 @@ public class MaterialService extends MainService{
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                idMaterial = resultSet.getInt("id");
+                material = new Material(resultSet.getInt("id"), resultSet.getString("name"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -110,6 +110,35 @@ public class MaterialService extends MainService{
                 }
             }
         }
-        return idMaterial;
+        return material;
+    }
+    public Material getMaterialById(Integer id) {
+        Material material = null;
+        connect = ConnectorDB();
+        String query = "SELECT * from material where id = ?";
+        try {
+            preparedStatement = connect.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                material = new Material(resultSet.getInt("id"), resultSet.getString("name"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            modalWindow.showError(e);
+        }finally {
+            if (connect != null) {
+                try {
+                    connect.close();
+                    preparedStatement.close();
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    modalWindow.showError(e);
+                }
+            }
+        }
+        return material;
     }
 }

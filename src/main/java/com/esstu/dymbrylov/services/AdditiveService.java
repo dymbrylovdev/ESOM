@@ -2,6 +2,7 @@ package com.esstu.dymbrylov.services;
 
 import com.esstu.dymbrylov.controllers.ModalController;
 import com.esstu.dymbrylov.model.Additive;
+import com.esstu.dymbrylov.model.Material;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -10,7 +11,7 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.Objects;
 
-public class AdditiveService extends MainService {
+public class AdditiveService extends SuperService {
     ModalController modalWindow = new ModalController();
 
     public AdditiveService() {
@@ -89,8 +90,8 @@ public class AdditiveService extends MainService {
         return response;
     }
 
-    public Integer getAdditiveByName(String name) {
-        Integer idAdditive = null;
+    public Additive getAdditiveByName(String name) {
+        Additive additive = null;
         connect = ConnectorDB();
         String query = "SELECT * from additive where name = ?";
         try {
@@ -99,7 +100,7 @@ public class AdditiveService extends MainService {
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                idAdditive = resultSet.getInt("id");
+                additive = new Additive(resultSet.getInt("id"), resultSet.getString("name"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -107,13 +108,41 @@ public class AdditiveService extends MainService {
         } finally {
             if (connect != null) {
                 try {
-                    connect.close(); // <-- This is important
+                    connect.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
                     modalWindow.showError(e);
                 }
             }
         }
-        return idAdditive;
+        return additive;
+    }
+
+    public Additive getAdditiveById(Integer id) {
+        Additive additive = null;
+        connect = ConnectorDB();
+        String query = "SELECT * from additive where id = ?";
+        try {
+            preparedStatement = connect.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                additive = new Additive(resultSet.getInt("id"), resultSet.getString("name"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            modalWindow.showError(e);
+        } finally {
+            if (connect != null) {
+                try {
+                    connect.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    modalWindow.showError(e);
+                }
+            }
+        }
+        return additive;
     }
 }

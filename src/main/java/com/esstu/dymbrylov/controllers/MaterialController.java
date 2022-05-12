@@ -24,8 +24,6 @@ public class MaterialController extends MaterialService implements Initializable
         }else {
             modalWindow.showAlertWarning(response.getValue());
         }
-//        JOptionPane.showMessageDialog(null, response.getValue());
-
     }
 
     @Override

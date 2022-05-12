@@ -6,7 +6,7 @@ import com.esstu.dymbrylov.controllers.ModalController;
 import com.esstu.dymbrylov.model.Additive;
 import com.esstu.dymbrylov.model.Material;
 import com.esstu.dymbrylov.model.Samples;
-import com.esstu.dymbrylov.services.AdditiveService;
+import com.esstu.dymbrylov.services.MainService;
 import com.esstu.dymbrylov.utils.CreateFileImg;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,21 +23,23 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class MainController extends AdditiveService implements Initializable {
+public class MainController extends MainService implements Initializable {
     int from = 0, to = 0;
-    int itemPerPage = 20;
+    int itemPerPage = 4;
 
+    @FXML
+    public Button btn_cancel_update_form;
+    @FXML
+    public Button btn_update_item;
     @FXML
     public TableColumn count;
     @FXML
@@ -135,7 +137,7 @@ public class MainController extends AdditiveService implements Initializable {
     private TextField id;
 
     @FXML
-    private TextField procent;
+    private TextField percent;
 
     @FXML
     private Button save_form;
@@ -145,6 +147,16 @@ public class MainController extends AdditiveService implements Initializable {
 
     @FXML
     private Tab data_tab;
+
+    @FXML
+    private TextField filterAdditive;
+
+    @FXML
+    private TextField filterMaterial;
+
+    @FXML
+    private TextField filterSamples;
+
 
     // Добавляет данные материала
     public void setListMaterial() {
@@ -237,46 +249,169 @@ public class MainController extends AdditiveService implements Initializable {
 
     // Сохраниение формы
     public void clickBtnSaveForm() {
-        form_root.setDisable(true);
-        Integer id_material = materialController.getMaterialByName(material_select.getValue());
-        Integer id_additive = additiveController.getAdditiveByName(additive_select.getValue());
-        for (Map.Entry<String, String> entry : mapPathImg.entrySet()) {
-            String newValue = createFileImg.saveImgInFolder(entry.getValue()).getValue();
-            mapPathImg.put(entry.getKey(), newValue);
+        try {
+            Integer id_material = materialController.getMaterialByName(material_select.getValue()) == null ?
+                    null : materialController.getMaterialByName(material_select.getValue()).getId();
+            Integer id_additive = additiveController.getAdditiveByName(additive_select.getValue()) == null ?
+                    null : additiveController.getAdditiveByName(additive_select.getValue()).getId();
+            for (Map.Entry<String, String> entry : mapPathImg.entrySet()) {
+                String newValue = createFileImg.saveImgInFolder(entry.getValue()).getValue();
+                mapPathImg.put(entry.getKey(), newValue);
+            }
+            Samples samples = new Samples(
+                    id.getText(), id_material, id_additive,
+                    layer_count.getText(), percent.getText(),
+                    mapPathImg.get("pathImg1"), mapPathImg.get("pathImg2"),
+                    mapPathImg.get("pathImg3"), mapPathImg.get("pathImg4")
+            );
+            Map.Entry<Boolean, String> response = saveFormData(samples);
+            if (response.getKey()) {
+                modalWindow.showAlertInformation(response.getValue());
+                setDataInTable();
+            } else {
+                modalWindow.showAlertWarning(response.getValue());
+                form_root.setDisable(false);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            modalWindow.showError(e);
         }
-        Samples samples = new Samples(
-                id.getText(), id_material, id_additive,
-                layer_count.getText(), procent.getText(),
-                mapPathImg.get("pathImg1"), mapPathImg.get("pathImg2"),
-                mapPathImg.get("pathImg3"), mapPathImg.get("pathImg4")
-        );
-        Map.Entry<Boolean, String> response = setFormData(samples);
-        if (response.getKey()) {
-            modalWindow.showAlertInformation(response.getValue());
-            setDataInTable();
-            form_root.setDisable(false);
-        } else {
-            modalWindow.showAlertWarning(response.getValue());
-            form_root.setDisable(false);
-        }
-
     }
 
+    public void clickBtnUpdateItemForm () {
+        try {
+            Integer id_material = materialController.getMaterialByName(material_select.getValue()) == null ?
+                    null : materialController.getMaterialByName(material_select.getValue()).getId();
+            Integer id_additive = additiveController.getAdditiveByName(additive_select.getValue()) == null ?
+                    null : additiveController.getAdditiveByName(additive_select.getValue()).getId();
+            for (Map.Entry<String, String> entry : mapPathImg.entrySet()) {
+                String newValue = createFileImg.saveImgInFolder(entry.getValue()).getValue();
+                mapPathImg.put(entry.getKey(), newValue);
+            }
+            Samples samples = new Samples(
+                    id.getText(), id_material, id_additive,
+                    layer_count.getText(), percent.getText(),
+                    mapPathImg.get("pathImg1"), mapPathImg.get("pathImg2"),
+                    mapPathImg.get("pathImg3"), mapPathImg.get("pathImg4")
+            );
+            Map.Entry<Boolean, String> response = updateFormData(samples);
+            if (response.getKey()) {
+                modalWindow.showAlertInformation(response.getValue());
+                setDataInTable();
+            } else {
+                modalWindow.showAlertWarning(response.getValue());
+                form_root.setDisable(false);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            modalWindow.showError(e);
+        }
+    }
 
-    public void testclick(ActionEvent actionEvent) {
-        SingleSelectionModel<Tab> selectionModel = root.getSelectionModel();
-        selectionModel.select(data_tab);
+    public void filterDataTable() {
+        setDataInTable();
+    }
 
+    public void clickResetFilter() {
+        filterSamples.setText("");
+        filterMaterial.setText("");
+        filterAdditive.setText("");
+        setDataInTable();
     }
 
     public Node createPage(Integer index) {
+        String strFilterSamples = filterSamples.getText();
+        String strFilterMaterial = filterMaterial.getText();
+        String strFilterAdditive = filterAdditive.getText();
         from = index * itemPerPage;
         to = itemPerPage;
+        formTableView.setItems(getAllSamples(from, to, strFilterSamples, strFilterMaterial, strFilterAdditive));
+        return formTableView;
+    }
+
+    public void setDataInTable() {
+        pagination.setPageFactory(this::createPage);
+        String strFilterSamples = filterSamples.getText();
+        String strFilterMaterial = filterMaterial.getText();
+        String strFilterAdditive = filterAdditive.getText();
+        int count = getCountPage(strFilterSamples, strFilterMaterial, strFilterAdditive);
+        percent_table.setCellValueFactory(new PropertyValueFactory<>("percent"));
+        pagination.setPageCount((count / itemPerPage) + 1);
+    }
+
+    //Удаление образцов из таблицы
+    public void deleteItemTable() {
+        List<DataTable> items = formTableView.getSelectionModel().getSelectedItems();
+        if (items.size() != 0) {
+            Map.Entry<Boolean, String> result = deleteSamplesById(items);
+            if (result.getKey()) {
+                modalWindow.showAlertInformation(result.getValue());
+            } else {
+                modalWindow.showAlertWarning(result.getValue());
+            }
+            setDataInTable();
+        } else {
+            modalWindow.showAlertInformation("Выберите образец или образцы которые ходите удалить");
+        }
+    }
+
+
+    //
+    public void updateItemTable() {
+        List<DataTable> item = formTableView.getSelectionModel().getSelectedItems();
+        if (item.size() != 0) {
+            if (item.size() == 1){
+                setItemInFormRoot(item.get(0));
+                SingleSelectionModel<Tab> selectionModel = root.getSelectionModel();
+                selectionModel.select(form_root);
+            }else {
+                modalWindow.showAlertInformation("Выберите один образец");
+            }
+        }else {
+            modalWindow.showAlertInformation("Выберите образец или образцы которые ходите обновить");
+        }
+    }
+
+    public void clearDataInForm() {
+        setValueTable(null);
+    }
+    public void setItemInFormRoot(DataTable item) {
+        setValueTable(item);
+        btn_update_item.setStyle("visibility: visible");
+        btn_cancel_update_form.setStyle("visibility: visible");
+    }
+    public void cancelFormUpdate() {
+        setValueTable(null);
+        SingleSelectionModel<Tab> selectionModel = root.getSelectionModel();
+        selectionModel.select(data_tab);
+        btn_update_item.setStyle("visibility: hidden");
+        btn_cancel_update_form.setStyle("visibility: hidden");
+    }
+
+    public void setValueTable(DataTable item) {
+        if (item != null) {
+            id.setText(item.getId());
+            percent.setText(item.getPercent());
+            layer_count.setText(item.getLayerCount());
+            additive_select.setValue(item.getNameAdditive());
+            material_select.setValue(item.getNameMaterial());
+        }else {
+            id.setText("");
+            percent.setText("");
+            layer_count.setText("");
+            additive_select.setValue("");
+            material_select.setValue("");
+        }
+
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         count.setCellValueFactory(new PropertyValueFactory<>("count"));
-        count.setPrefWidth(20);
+        count.setPrefWidth(30);
         id_table.setCellValueFactory(new PropertyValueFactory<>("id"));
-        id_material_table.setCellValueFactory(new PropertyValueFactory<>("idMaterial"));
-        id_additive_table.setCellValueFactory(new PropertyValueFactory<>("idAdditive"));
+        id_material_table.setCellValueFactory(new PropertyValueFactory<>("nameMaterial"));
+        id_additive_table.setCellValueFactory(new PropertyValueFactory<>("nameAdditive"));
         layer_count_table.setCellValueFactory(new PropertyValueFactory<>("layerCount"));
         photoAfter.setPrefWidth(200);
         photoAfter.setCellValueFactory(new PropertyValueFactory<>("photoAfter"));
@@ -286,26 +421,11 @@ public class MainController extends AdditiveService implements Initializable {
         photoAfterTest.setCellValueFactory(new PropertyValueFactory<>("photoAfterTest"));
         photoReverse.setPrefWidth(200);
         photoReverse.setCellValueFactory(new PropertyValueFactory<>("photoReverse"));
-        formTableView.setItems(getAllSamples(from, to));
-        return formTableView;
-    }
-
-    public void setDataInTable() {
-        int count = getCountPage();
-        percent_table.setCellValueFactory(new PropertyValueFactory<>("percent"));
-        pagination.setPageCount((count/itemPerPage)+1);
-        pagination.setPageFactory(this::createPage);
-    }
-
-
-
-
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
         setDataInTable();
         setListMaterial();
         setListAdditive();
+
+        formTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         if (materialController.ConnectorDB() != null) {
             bdInfo.setText("База данных подключена");
             bdInfo.setStyle("-fx-text-fill: green");

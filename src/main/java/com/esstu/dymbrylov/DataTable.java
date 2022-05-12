@@ -9,8 +9,8 @@ public class DataTable {
 
     private final SimpleIntegerProperty count;
     private final SimpleStringProperty id;
-    private final SimpleIntegerProperty idMaterial;
-    private final SimpleIntegerProperty idAdditive;
+    private final SimpleStringProperty nameMaterial;
+    private final SimpleStringProperty nameAdditive;
     private final SimpleStringProperty layerCount;
     private final SimpleStringProperty percent;
 
@@ -19,11 +19,11 @@ public class DataTable {
     private ImageView photoAfterTest;
     private ImageView photoReverse;
 
-    public DataTable(Integer count, String id, Integer id_material, Integer id_additive, String layer_count, String percent, ImageView photoAfter, ImageView photoBefore, ImageView photoAfterTest, ImageView photoReverse) {
+    public DataTable(Integer count, String id, String material, String additive, String layer_count, String percent, ImageView photoAfter, ImageView photoBefore, ImageView photoAfterTest, ImageView photoReverse) {
         this.count = new SimpleIntegerProperty(count);
         this.id = new SimpleStringProperty(id);
-        this.idMaterial = new SimpleIntegerProperty(id_material);
-        this.idAdditive = new SimpleIntegerProperty(id_additive);
+        this.nameMaterial = new SimpleStringProperty(material);
+        this.nameAdditive = new SimpleStringProperty(additive);
         this.layerCount = new SimpleStringProperty(layer_count);
         this.percent = new SimpleStringProperty(percent);
         this.photoAfter = photoAfter;
@@ -31,7 +31,6 @@ public class DataTable {
         this.photoAfterTest = photoAfterTest;
         this.photoReverse = photoReverse;
     }
-
 
     public int getCount() {
         return count.get();
@@ -44,6 +43,7 @@ public class DataTable {
     public void setCount(int count) {
         this.count.set(count);
     }
+
     public String getId() {
         return id.get();
     }
@@ -56,28 +56,28 @@ public class DataTable {
         this.id.set(id);
     }
 
-    public int getIdMaterial() {
-        return idMaterial.get();
+    public String getNameMaterial() {
+        return nameMaterial.get();
     }
 
-    public SimpleIntegerProperty idMaterialProperty() {
-        return idMaterial;
+    public SimpleStringProperty nameMaterialProperty() {
+        return nameMaterial;
     }
 
-    public void setIdMaterial(int idMaterial) {
-        this.idMaterial.set(idMaterial);
+    public void setNameMaterial(String nameMaterial) {
+        this.nameMaterial.set(nameMaterial);
     }
 
-    public int getIdAdditive() {
-        return idAdditive.get();
+    public String getNameAdditive() {
+        return nameAdditive.get();
     }
 
-    public SimpleIntegerProperty idAdditiveProperty() {
-        return idAdditive;
+    public SimpleStringProperty nameAdditiveProperty() {
+        return nameAdditive;
     }
 
-    public void setIdAdditive(int idAdditive) {
-        this.idAdditive.set(idAdditive);
+    public void setNameAdditive(String nameAdditive) {
+        this.nameAdditive.set(nameAdditive);
     }
 
     public String getLayerCount() {

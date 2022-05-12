@@ -7,3 +7,12 @@
     -fx-opacity: 0.2;
     -fx-cursor: hand;
 }
+
+.btn_update_item {
+
+}
+
+.visibility {
+    visibility: hidden;
+}
+
