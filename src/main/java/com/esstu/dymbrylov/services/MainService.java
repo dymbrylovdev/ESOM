@@ -49,7 +49,7 @@ public class MainService extends SuperService {
             return response = Map.entry(false, resultCode.getValue());
         }
         try {
-            String query = "UPDATE samples SET id=?, id_material=?, id_additive=?, layer_count=?, percent=?, photo_after=?, photo_before=?, photo_after_test=?, photo_reverse=? WHERE id=?";
+            String query = "INSERT INTO samples(id, id_material, id_additive, layer_count, percent, photo_after, photo_before, photo_after_test, photo_reverse) VALUES(?,?,?,?,?,?,?,?,?)";
             connect = ConnectorDB();
             preparedStatement = connect.prepareStatement(query);
             preparedStatement.setString(1, samples.getId());
@@ -88,8 +88,39 @@ public class MainService extends SuperService {
 
     public Map.Entry<Boolean, String> updateFormData(Samples samples) {
         Map.Entry<Boolean, String> response = Map.entry(false, "Произошла ошибка при обновлении данных");
+        try {
+            connect = ConnectorDB();
+            String query = "UPDATE samples SET id_material=?, id_additive=?, layer_count=?, percent=?, photo_after=?, photo_before=?, photo_after_test=?, photo_reverse=? WHERE id=?";
+            preparedStatement = connect.prepareStatement(query);
+            preparedStatement.setInt(1, samples.getId_material());
+            preparedStatement.setInt(2, samples.getId_additive());
+            preparedStatement.setString(3, samples.getLayer_count());
+            preparedStatement.setString(4, samples.getPercent());
+            preparedStatement.setString(5, samples.getPhoto_after());
+            preparedStatement.setString(6, samples.getPhoto_before());
+            preparedStatement.setString(7, samples.getPhoto_after_test());
+            preparedStatement.setString(8, samples.getPhoto_reverse());
+            preparedStatement.setString(9, samples.getId());
+            int result = preparedStatement.executeUpdate();
+            if (result == 1) {
+                response = Map.entry(true, "Образец обновлен");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            modalWindow.showError(e);
+        } finally {
+            if (connect != null) {
+                try {
+                    connect.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    modalWindow.showError(e);
+                }
+            }
+        }
         return response;
     }
+
     public Map.Entry<Boolean, String> getSamplesById(String id) {
         Map.Entry<Boolean, String> response = Map.entry(false, "");
         connect = ConnectorDB();
@@ -123,7 +154,7 @@ public class MainService extends SuperService {
                                                    String strFilterAdditive
     ) {
         ObservableList<DataTable> dataList = FXCollections.observableArrayList();
-
+        long time = System.currentTimeMillis();
         String query = "SELECT * FROM samples" + createQueryFilter(strFilterSamples, strFilterMaterial, strFilterAdditive);
         query += " limit " + from + "," + to;
         connect = ConnectorDB();
@@ -164,6 +195,7 @@ public class MainService extends SuperService {
                 }
             }
         }
+        System.out.println((double) (System.currentTimeMillis() - time));
         return dataList;
     }
 

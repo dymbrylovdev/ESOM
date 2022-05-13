@@ -1,6 +1,8 @@
 package com.esstu.dymbrylov.utils;
 
 
+import javafx.scene.image.Image;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -62,5 +64,10 @@ public class CreateFileImg {
 
     public static String getFileName(String fileName) {
         return fileName.substring(0, fileName.lastIndexOf('.'));
+    }
+
+    public Image getImgForPath(String path) {
+        Image img = new Image(path);
+        return img;
     }
 }

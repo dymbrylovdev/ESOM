@@ -33,6 +33,8 @@ import java.net.URL;
 import java.util.*;
 
 public class MainController extends MainService implements Initializable {
+    @FXML
+    public Button btn_clean_form;
     int from = 0, to = 0;
     int itemPerPage = 4;
 
@@ -298,6 +300,7 @@ public class MainController extends MainService implements Initializable {
             if (response.getKey()) {
                 modalWindow.showAlertInformation(response.getValue());
                 setDataInTable();
+                cancelFormUpdate();
             } else {
                 modalWindow.showAlertWarning(response.getValue());
                 form_root.setDisable(false);
@@ -379,28 +382,43 @@ public class MainController extends MainService implements Initializable {
         setValueTable(item);
         btn_update_item.setStyle("visibility: visible");
         btn_cancel_update_form.setStyle("visibility: visible");
+
+        save_form.setStyle("visibility: hidden");
+        btn_clean_form.setStyle("visibility: hidden");
     }
     public void cancelFormUpdate() {
         setValueTable(null);
         SingleSelectionModel<Tab> selectionModel = root.getSelectionModel();
         selectionModel.select(data_tab);
+        id.setDisable(false);
         btn_update_item.setStyle("visibility: hidden");
         btn_cancel_update_form.setStyle("visibility: hidden");
+        save_form.setStyle("visibility: visible");
+        btn_clean_form.setStyle("visibility: visible");
     }
 
     public void setValueTable(DataTable item) {
         if (item != null) {
             id.setText(item.getId());
+            id.setDisable(true);
             percent.setText(item.getPercent());
             layer_count.setText(item.getLayerCount());
             additive_select.setValue(item.getNameAdditive());
             material_select.setValue(item.getNameMaterial());
+            img_1.setImage(new Image(item.getPhotoAfter().getImage().getUrl(), 288, 288, false, true));
+            img_2.setImage(new Image(item.getPhotoBefore().getImage().getUrl(), 288, 288, false, true));
+            img_3.setImage(new Image(item.getPhotoAfterTest().getImage().getUrl(), 288, 288, false, true));
+            img_4.setImage(new Image(item.getPhotoReverse().getImage().getUrl(), 288, 288, false, true));
         }else {
             id.setText("");
             percent.setText("");
             layer_count.setText("");
-            additive_select.setValue("");
-            material_select.setValue("");
+            additive_select.setValue(null);
+            material_select.setValue(null);
+            img_1.setImage(null);
+            img_2.setImage(null);
+            img_3.setImage(null);
+            img_4.setImage(null);
         }
 
     }
@@ -424,11 +442,10 @@ public class MainController extends MainService implements Initializable {
         setDataInTable();
         setListMaterial();
         setListAdditive();
-
         formTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         if (materialController.ConnectorDB() != null) {
             bdInfo.setText("База данных подключена");
-            bdInfo.setStyle("-fx-text-fill: green");
+            bdInfo.setStyle("-fx-text-fill: #fff");
         } else {
             bdInfo.setText("База данных не подключена");
             bdInfo.setStyle("-fx-text-fill: red");

@@ -2,17 +2,105 @@
     -fx-background-color: transparent;
 }
 
+.body-form {
+    -fx-background-color: linear-gradient(to right bottom, #445877,#5fad8d);
+}
+
 .btn_set_image:hover {
     -fx-background-color: #cecece;
     -fx-opacity: 0.2;
     -fx-cursor: hand;
 }
 
-.btn_update_item {
 
+
+.button {
+    -fx-background-color: transparent;
+    -fx-font-family: "Roboto Thin";
+    -fx-font-size: 16px;
+    /*-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 10, 0, 0, 0);*/
+    -fx-border-radius: 5;
+    -fx-graphic-text-gap: 0;
+
+}
+
+.button:hover{
+    /*-fx-background-color: linear-gradient(to right bottom, #de2c59, #1e3ad3);*/
+    -fx-focus-traversable: 2;
+    -fx-text-fill: #fff;
+}
+.arrow-button {
+}
+
+
+.arrow {
+    -fx-background-color: #445877;
 }
 
 .visibility {
     visibility: hidden;
 }
 
+.text-field {
+    -fx-border-radius: 4px;
+    /*-fx-border-color: linear-gradient(to right bottom,#CD3C61,#334AC5);*/
+    -fx-pref-height: 30px;
+}
+.text-field:hover {
+    /*-fx-border-color: linear-gradient(to right bottom,#334AC5,#CD3C61);*/
+}
+.text-field .text {
+    -fx-font-family: "Roboto Thin";
+    /*-fx-fill: #334AC5;*/
+}
+
+.combo-box{
+    -fx-font-family: "Roboto Thin";
+    -fx-pref-height: 30px;
+    -fx-border-radius: 5;
+    -fx-font-size: 16px;
+    -fx-text-fill: #445877;
+}
+.combo-box .text{
+    -fx-fill: #445877;
+}
+
+.first-title-pane .title {
+    -fx-border-width: 2;
+    -fx-text-fill: #eaeaea;
+}
+.first-title-pane .title .text{
+    -fx-fill: #445877;
+    -fx-font-size: 14px;
+}
+.title-pane .title {
+    -fx-border-width: 2;
+    -fx-font-family: "Roboto Thin";
+}
+
+.title-pane .title .text{
+    -fx-fill: #445877;
+    -fx-font-family: "Roboto Thin";
+}
+.btn_form {
+    -fx-border-color: #fff;
+    -fx-text-fill: #fff;
+}
+
+
+.btn_form:hover {
+    -fx-border-color: none;
+    -fx-background-color: #fff;
+    -fx-text-fill: #445877;
+
+}
+
+
+.focus-indicator {
+    -fx-text-fill: #fff;
+}
+.label-form {
+    -fx-font-family: "Roboto Thin";
+    -fx-font-size: 15px;
+    -fx-text-fill: #fff;
+}
