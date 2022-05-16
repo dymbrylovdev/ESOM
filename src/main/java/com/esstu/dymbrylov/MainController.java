@@ -480,8 +480,9 @@ public class MainController extends MainService implements Initializable {
     public void downReport() {
 
         try {
-            String reportSrcFile = getClass().getResource("report").toExternalForm();
-            JasperReport jasperReport = JasperCompileManager.compileReport(reportSrcFile.substring(6)+"/mainReport.jrxml");
+            String parent = System.getProperty("user.dir")+"/report/mainReport.jrxml";
+
+            JasperReport jasperReport = JasperCompileManager.compileReport(parent);
             JasperPrint print = JasperFillManager.fillReport(jasperReport, null, ConnectorDB());
             JasperViewer.viewReport(print, false);
         } catch (JRException e) {
