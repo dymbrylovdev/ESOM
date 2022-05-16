@@ -90,10 +90,6 @@ LEFT JOIN material  ON material.id  = s.id_material]]>
 				</textElement>
 				<text><![CDATA[Отчет образцов композиционных материалов]]></text>
 			</staticText>
-			<image>
-				<reportElement x="1" y="0" width="163" height="80" uuid="26171931-bbe9-4f04-89d0-3a61cd83232b"/>
-				<imageExpression><![CDATA["C:/Users/Gunga/Desktop/allProject/dymbrylov/src/main/resources/com/esstu/dymbrylov/imges/avatar.png"]]></imageExpression>
-			</image>
 		</band>
 	</title>
 	<pageHeader>
