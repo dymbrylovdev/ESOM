@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="mainReport" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2e613ad9-613e-4a1f-bc3d-06625a4ef45c">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter"/>
+	<queryString language="SQL">
+		<![CDATA[select *, additive.name as name_additive, material.name as name_material
+ from samples as s
+LEFT JOIN additive  ON additive.id  = s.id_additive
+LEFT JOIN material  ON material.id  = s.id_material]]>
+	</queryString>
+	<field name="id" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="samples"/>
+	</field>
+	<field name="name_material" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="name_material"/>
+		<property name="com.jaspersoft.studio.field.label" value="name_material"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="material"/>
+	</field>
+	<field name="name_additive" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="name_additive"/>
+		<property name="com.jaspersoft.studio.field.label" value="name_additive"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="additive"/>
+	</field>
+	<field name="layer_count" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="layer_count"/>
+		<property name="com.jaspersoft.studio.field.label" value="layer_count"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="samples"/>
+	</field>
+	<field name="percent" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="percent"/>
+		<property name="com.jaspersoft.studio.field.label" value="percent"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="samples"/>
+	</field>
+	<field name="photo_after" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="photo_after"/>
+		<property name="com.jaspersoft.studio.field.label" value="photo_after"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="samples"/>
+	</field>
+	<field name="photo_before" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="photo_before"/>
+		<property name="com.jaspersoft.studio.field.label" value="photo_before"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="samples"/>
+	</field>
+	<field name="photo_after_test" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="photo_after_test"/>
+		<property name="com.jaspersoft.studio.field.label" value="photo_after_test"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="samples"/>
+	</field>
+	<field name="photo_reverse" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="photo_reverse"/>
+		<property name="com.jaspersoft.studio.field.label" value="photo_reverse"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="samples"/>
+	</field>
+	<group name="id">
+		<groupExpression><![CDATA[$F{id}]]></groupExpression>
+	</group>
+	<group name="name_material">
+		<groupExpression><![CDATA[$F{name_material}]]></groupExpression>
+	</group>
+	<group name="name_additive">
+		<groupExpression><![CDATA[$F{name_additive}]]></groupExpression>
+	</group>
+	<group name="layer_count">
+		<groupExpression><![CDATA[$F{layer_count}]]></groupExpression>
+	</group>
+	<group name="percent">
+		<groupExpression><![CDATA[$F{percent}]]></groupExpression>
+	</group>
+	<group name="photo_after">
+		<groupExpression><![CDATA[$F{photo_after}]]></groupExpression>
+	</group>
+	<group name="photo_before">
+		<groupExpression><![CDATA[$F{photo_before}]]></groupExpression>
+	</group>
+	<group name="photo_after_test">
+		<groupExpression><![CDATA[$F{photo_after_test}]]></groupExpression>
+	</group>
+	<group name="photo_reverse">
+		<groupExpression><![CDATA[$F{photo_reverse}]]></groupExpression>
+	</group>
+	<title>
+		<band height="126" splitType="Stretch">
+			<staticText>
+				<reportElement x="164" y="0" width="628" height="126" uuid="e0098c61-2235-4079-8af1-631946f7f07b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="40"/>
+				</textElement>
+				<text><![CDATA[Отчет образцов композиционных материалов]]></text>
+			</staticText>
+			<image>
+				<reportElement x="1" y="0" width="163" height="80" uuid="26171931-bbe9-4f04-89d0-3a61cd83232b"/>
+				<imageExpression><![CDATA["C:/Users/Gunga/Desktop/allProject/dymbrylov/src/main/resources/com/esstu/dymbrylov/imges/avatar.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="320" y="0" width="80" height="60" forecolor="#757572" uuid="c7bb0267-d245-4ae7-ad15-2ccc84d52619">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Процент содержания]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="0" width="80" height="60" forecolor="#757572" uuid="98629650-eda6-4073-8c45-fdd0cfef953c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Слои]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="0" width="80" height="60" forecolor="#757572" uuid="9e8ac05a-f039-4512-ac3e-dbc986a25c53">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Добавка]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="580" y="0" width="90" height="60" forecolor="#757572" uuid="f12af730-d614-40bf-962f-d4b2d6a061e9">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Фото после испытания на прочность ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="80" height="60" forecolor="#757572" uuid="555e8d95-5bda-4b94-bd47-018b330d0b66">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Номер образца]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="670" y="0" width="90" height="60" forecolor="#757572" uuid="e9ab6910-9253-49ae-bb7e-bfe074af3a97">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Фото обратной стороны]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="490" y="0" width="90" height="60" forecolor="#757572" uuid="8957e675-4271-46fa-a3cb-f7a5d0c10b60">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Фото до испытания]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="0" width="90" height="60" forecolor="#757572" uuid="894d51fa-c4d0-4201-86c5-8e7df0623f0c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Фото после испытания]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="0" width="80" height="60" forecolor="#757572" uuid="e09b595a-3b5a-41fe-8558-94947b9aef48">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Материал]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="100" splitType="Stretch">
+			<textField>
+				<reportElement x="160" y="0" width="80" height="100" forecolor="#736343" uuid="da52354c-ae16-4f33-9684-2c3f7b35b1bf"/>
+				<box topPadding="10" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name_additive}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="0" width="80" height="100" forecolor="#736343" uuid="b3157d22-e293-437e-99a1-8360b4639c54"/>
+				<box topPadding="10" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name_material}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="240" y="0" width="80" height="100" forecolor="#736343" uuid="078ff5e0-fb9f-488b-b130-42041cb01bc3"/>
+				<box topPadding="10" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{layer_count}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="0" width="80" height="100" forecolor="#736343" uuid="82408d65-d0c1-4dfe-ab00-541a23787dde"/>
+				<box topPadding="10" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{percent}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="80" height="100" forecolor="#736343" uuid="6a7c5eb1-326f-48d8-b5d5-914cb46faeb0"/>
+				<box topPadding="10" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame" isLazy="true">
+				<reportElement x="400" y="0" width="90" height="100" uuid="a8657f0f-63b1-411d-b7da-68d7b69137e1">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+				</box>
+				<imageExpression><![CDATA[$F{photo_after}.toString()]]></imageExpression>
+			</image>
+			<image scaleImage="FillFrame" isLazy="true">
+				<reportElement x="490" y="0" width="90" height="100" uuid="034c5ba4-85be-478d-b941-70b98f57f76e">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+				</box>
+				<imageExpression><![CDATA[$F{photo_before}.toString()]]></imageExpression>
+			</image>
+			<image scaleImage="FillFrame" isLazy="true">
+				<reportElement x="580" y="0" width="90" height="100" uuid="8993fd34-4ef6-4ae3-a35c-48ea55607f26">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+				</box>
+				<imageExpression><![CDATA[$F{photo_after_test}.toString()]]></imageExpression>
+			</image>
+			<image scaleImage="FillFrame" isLazy="true">
+				<reportElement x="670" y="0" width="90" height="100" uuid="d783a0f9-a9b9-442d-8a25-0297f1f83b70">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
+				</box>
+				<imageExpression><![CDATA[$F{photo_reverse}.toString()]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+</jasperReport>

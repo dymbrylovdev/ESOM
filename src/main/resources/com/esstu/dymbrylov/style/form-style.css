@@ -26,7 +26,6 @@
 
 .button:hover{
     /*-fx-background-color: linear-gradient(to right bottom, #de2c59, #1e3ad3);*/
-    -fx-focus-traversable: 2;
     -fx-text-fill: #fff;
 }
 .arrow-button {
@@ -81,6 +80,7 @@
 .title-pane .title .text{
     -fx-fill: #445877;
     -fx-font-family: "Roboto Thin";
+    -fx-font-size: 14px;
 }
 .btn_form {
     -fx-border-color: #fff;
@@ -104,3 +104,4 @@
     -fx-font-size: 15px;
     -fx-text-fill: #fff;
 }
+

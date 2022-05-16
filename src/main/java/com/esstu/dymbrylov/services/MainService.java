@@ -12,9 +12,7 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.sql.*;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -61,10 +59,18 @@ public class MainService extends SuperService {
             }
             preparedStatement.setString(4, samples.getLayer_count());
             preparedStatement.setString(5, samples.getPercent());
-            preparedStatement.setString(6, samples.getPhoto_after());
-            preparedStatement.setString(7, samples.getPhoto_before());
-            preparedStatement.setString(8, samples.getPhoto_after_test());
-            preparedStatement.setString(9, samples.getPhoto_reverse());
+            if (samples.getPhoto_after() != null) {
+                preparedStatement.setString(6, samples.getPhoto_after());
+            }
+            if (samples.getPhoto_before() != null) {
+                preparedStatement.setString(7, samples.getPhoto_before());
+            }
+            if (samples.getPhoto_after_test() != null) {
+                preparedStatement.setString(8, samples.getPhoto_after_test());
+            }
+            if (samples.getPhoto_reverse() != null) {
+                preparedStatement.setString(9, samples.getPhoto_reverse());
+            }
             int result = preparedStatement.executeUpdate();
 
             if (result == 1) {
@@ -92,14 +98,26 @@ public class MainService extends SuperService {
             connect = ConnectorDB();
             String query = "UPDATE samples SET id_material=?, id_additive=?, layer_count=?, percent=?, photo_after=?, photo_before=?, photo_after_test=?, photo_reverse=? WHERE id=?";
             preparedStatement = connect.prepareStatement(query);
-            preparedStatement.setInt(1, samples.getId_material());
-            preparedStatement.setInt(2, samples.getId_additive());
+            if (samples.getId_material() != null) {
+                preparedStatement.setInt(1, samples.getId_material());
+            }
+            if (samples.getId_additive() != null) {
+                preparedStatement.setInt(2, samples.getId_additive());
+            }
             preparedStatement.setString(3, samples.getLayer_count());
             preparedStatement.setString(4, samples.getPercent());
-            preparedStatement.setString(5, samples.getPhoto_after());
-            preparedStatement.setString(6, samples.getPhoto_before());
-            preparedStatement.setString(7, samples.getPhoto_after_test());
-            preparedStatement.setString(8, samples.getPhoto_reverse());
+            if (samples.getPhoto_after() != null) {
+                preparedStatement.setString(5, samples.getPhoto_after());
+            }
+            if (samples.getPhoto_before() != null) {
+                preparedStatement.setString(6, samples.getPhoto_before());
+            }
+            if (samples.getPhoto_after_test() != null) {
+                preparedStatement.setString(7, samples.getPhoto_after_test());
+            }
+            if (samples.getPhoto_reverse() != null) {
+                preparedStatement.setString(8, samples.getPhoto_reverse());
+            }
             preparedStatement.setString(9, samples.getId());
             int result = preparedStatement.executeUpdate();
             if (result == 1) {
@@ -163,10 +181,31 @@ public class MainService extends SuperService {
             ResultSet resultSet = preparedStatement.executeQuery();
             preparedStatement.clearParameters();
             while (resultSet.next()) {
-                Image newImage1 = new Image(new File(resultSet.getString("photo_after")).toURI().toURL().toString());
-                Image newImage2 = new Image(new File(resultSet.getString("photo_before")).toURI().toURL().toString());
-                Image newImage3 = new Image(new File(resultSet.getString("photo_after_test")).toURI().toURL().toString());
-                Image newImage4 = new Image(new File(resultSet.getString("photo_reverse")).toURI().toURL().toString());
+                Image newImage1 = null;
+                Image newImage2 = null;
+                Image newImage3 = null;
+                Image newImage4 = null;
+
+                if (resultSet.getString("photo_after") != null) {
+                    {
+                        newImage1 = new Image(new File(resultSet.getString("photo_after")).toURI().toURL().toString());
+                    }
+                }
+                if (resultSet.getString("photo_before") != null) {
+                    {
+                        newImage2 = new Image(new File(resultSet.getString("photo_before")).toURI().toURL().toString());
+                    }
+                }
+                if (resultSet.getString("photo_after_test") != null) {
+                    {
+                        newImage3 = new Image(new File(resultSet.getString("photo_after_test")).toURI().toURL().toString());
+                    }
+                }
+                if (resultSet.getString("photo_reverse") != null) {
+                    {
+                        newImage4 = new Image(new File(resultSet.getString("photo_reverse")).toURI().toURL().toString());
+                    }
+                }
                 ImageView photo_after = setParamsWithImg(newImage1);
                 ImageView photo_before = setParamsWithImg(newImage2);
                 ImageView photo_after_test = setParamsWithImg(newImage3);
@@ -204,7 +243,26 @@ public class MainService extends SuperService {
         connect = ConnectorDB();
         try {
             int response = 0;
+            String parent = System.getProperty("user.dir");
+            File dir = new File(parent, "img");
             for (DataTable item : items) {
+                List<Image> list = new ArrayList<>(Arrays.asList(
+                        item.getPhotoAfter().getImage() ,
+                        item.getPhotoBefore().getImage(),
+                        item.getPhotoAfterTest().getImage(),
+                        item.getPhotoReverse().getImage()
+                ));
+                for (Image img : list) {
+                    if (img != null) {
+                        String imgFile = new File(img.getUrl()).getName();
+                        File newImgFIle = new File(dir, imgFile);
+                        if (newImgFIle.delete()) {
+                            System.out.println("Deleted the file: " + newImgFIle.getName());
+                        } else {
+                            System.out.println("Failed to delete the file.");
+                        }
+                    }
+                }
                 String strItem = "id=\'" + item.getId() + "\'";
                 String query = "DELETE FROM samples where " + strItem;
                 preparedStatement = connect.prepareStatement(query);

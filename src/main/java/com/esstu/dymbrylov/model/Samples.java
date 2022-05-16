@@ -60,4 +60,20 @@ public class Samples {
     public String getPhoto_reverse() {
         return photo_reverse;
     }
+
+
+    @Override
+    public String toString() {
+        return "Samples{" +
+                "id='" + id + '\'' +
+                ", id_material=" + id_material +
+                ", id_additive=" + id_additive +
+                ", layer_count='" + layer_count + '\'' +
+                ", percent='" + percent + '\'' +
+                ", photo_after='" + photo_after + '\'' +
+                ", photo_before='" + photo_before + '\'' +
+                ", photo_after_test='" + photo_after_test + '\'' +
+                ", photo_reverse='" + photo_reverse + '\'' +
+                '}';
+    }
 }

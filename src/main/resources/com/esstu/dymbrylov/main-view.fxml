@@ -15,8 +15,9 @@
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<TabPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="900.0" prefHeight="736.0" prefWidth="1032.0" tabClosingPolicy="UNAVAILABLE" tabMinWidth="100.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esstu.dymbrylov.MainController">
+<TabPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="900.0" prefHeight="736.0" prefWidth="1032.0" tabClosingPolicy="UNAVAILABLE" tabMinWidth="100.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esstu.dymbrylov.MainController">
     <tabs>
         <Tab fx:id="form_root" text="Форма">
             <content>
@@ -24,7 +25,7 @@
                     <children>
                         <Accordion layoutX="708.0" layoutY="24.0" prefHeight="390.0" prefWidth="290.0" stylesheets="@style/form-style.css">
                             <panes>
-                                <TitledPane animated="false" prefHeight="296.0" prefWidth="290.0" style="-fx-border-radius: 5;" styleClass="first-title-pane" stylesheets="@style/form-style.css" text="Фото до испытания ">
+                                <TitledPane animated="false" prefHeight="296.0" prefWidth="290.0" style="-fx-border-radius: 5;" styleClass="first-title-pane" stylesheets="@style/form-style.css" text="Фото после испытания">
                                     <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                             <children>
@@ -34,7 +35,7 @@
                                         </AnchorPane>
                                     </content>
                                 </TitledPane>
-                                <TitledPane animated="false" styleClass="title-pane" stylesheets="@style/form-style.css" text="Фото после испытания ">
+                                <TitledPane animated="false" styleClass="title-pane" stylesheets="@style/form-style.css" text="Фото до испытания ">
                                     <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                             <children>
@@ -44,7 +45,7 @@
                                         </AnchorPane>
                                     </content>
                                 </TitledPane>
-                                <TitledPane animated="false" styleClass="title-pane" stylesheets="@style/form-style.css" text="Фото обратной стороны ">
+                                <TitledPane animated="false" styleClass="title-pane" stylesheets="@style/form-style.css" text="Фото после испытания на прочность">
                                     <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                             <children>
@@ -54,7 +55,7 @@
                                         </AnchorPane>
                                     </content>
                                 </TitledPane>
-                                <TitledPane animated="false" styleClass="title-pane" stylesheets="@style/form-style.css" text="Фото после испытания ">
+                                <TitledPane animated="false" styleClass="title-pane" stylesheets="@style/form-style.css" text="Фото обратной стороны">
                                     <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                             <children>
@@ -69,15 +70,26 @@
                         <TextField fx:id="id" layoutX="34.0" layoutY="26.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="230.0" promptText="Номер образца" styleClass="text-field_all_style" stylesheets="@style/form-style.css" />
                         <TextField fx:id="layer_count" layoutX="34.0" layoutY="99.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="230.0" promptText="Количество слоев" stylesheets="@style/form-style.css" />
                         <TextField fx:id="percent" layoutX="34.0" layoutY="174.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="230.0" promptText="Процент содержания" stylesheets="@style/form-style.css" />
-                        <ComboBox fx:id="material_select" layoutX="89.0" layoutY="298.0" prefHeight="26.0" prefWidth="230.0" promptText="Выибрите материал" styleClass="combo-box" stylesheets="@style/form-style.css" />
+                        <ComboBox fx:id="material_select" layoutX="34.0" layoutY="308.0" prefHeight="26.0" prefWidth="230.0" promptText="Выбирите материал" styleClass="combo-box" stylesheets="@style/form-style.css" />
                         <Button fx:id="save_form" layoutX="877.0" layoutY="620.0" mnemonicParsing="false" onMouseClicked="#clickBtnSaveForm" prefHeight="50.0" prefWidth="121.0" styleClass="btn_form" stylesheets="@style/form-style.css" text="Сохранить" />
-                        <Button fx:id="add_material_button" layoutX="346.0" layoutY="297.0" minWidth="24.0" mnemonicParsing="false" onAction="#clickBtnAddMaterial" prefHeight="30.0" prefWidth="59.0" styleClass="btn_form" text="+">
+                        <Button fx:id="add_material_button" layoutX="294.0" layoutY="306.0" minWidth="24.0" mnemonicParsing="false" onAction="#clickBtnAddMaterial" prefHeight="30.0" prefWidth="59.0" text="+">
                             <stylesheets>
                             </stylesheets>
+                     <styleClass>
+                        <String fx:value="btn_form" />
+                        <String fx:value="add_material_btn" />
+                     </styleClass>
+                     <font>
+                        <Font size="12.0" />
+                     </font>
                         </Button>
-                        <Button layoutX="346.0" layoutY="391.0" minWidth="24.0" mnemonicParsing="false" onAction="#clickBtnAddAdditive" prefHeight="30.0" prefWidth="59.0" styleClass="btn_form" text="+" />
+                        <Button layoutX="294.0" layoutY="400.0" minWidth="24.0" mnemonicParsing="false" onAction="#clickBtnAddAdditive" prefHeight="30.0" prefWidth="59.0" text="+">
+                     <styleClass>
+                        <String fx:value="btn_form" />
+                        <String fx:value="add_material_btn" />
+                     </styleClass></Button>
                         <Label fx:id="bdInfo" alignment="CENTER" layoutX="20.0" layoutY="645.0" prefHeight="39.0" prefWidth="259.0" styleClass="label-form" />
-                        <ComboBox fx:id="additive_select" layoutX="89.0" layoutY="392.0" prefHeight="26.0" prefWidth="230.0" promptText="Выбирите добавку" stylesheets="@style/form-style.css" />
+                        <ComboBox fx:id="additive_select" layoutX="34.0" layoutY="402.0" prefHeight="26.0" prefWidth="230.0" promptText="Выбирите добавку" stylesheets="@style/form-style.css" />
                         <Button fx:id="btn_clean_form" layoutX="602.0" layoutY="621.0" mnemonicParsing="false" onAction="#clearDataInForm" prefHeight="50.0" prefWidth="142.0" styleClass="btn_form" stylesheets="@style/form-style.css" text="Очистить">
                      <opaqueInsets>
                         <Insets />
@@ -92,8 +104,23 @@
                         <String fx:value="btn_form" />
                         <String fx:value="visibility" />
                      </styleClass></Button>
-                  <Label alignment="CENTER" layoutX="34.0" layoutY="353.0" prefHeight="39.0" prefWidth="110.0" styleClass="label-form" text="Добавка: " />
-                  <Label alignment="CENTER" layoutX="34.0" layoutY="258.0" prefHeight="39.0" prefWidth="91.0" styleClass="label-form" text="Материал: " />
+                  <Label alignment="CENTER" layoutX="34.0" layoutY="364.0" prefHeight="39.0" prefWidth="71.0" styleClass="label-form" text="Добавка: " />
+                  <Label alignment="CENTER" layoutX="34.0" layoutY="268.0" prefHeight="39.0" prefWidth="79.0" styleClass="label-form" text="Материал: " />
+                  <Button fx:id="delete_material_button" layoutX="372.0" layoutY="306.0" minWidth="24.0" mnemonicParsing="false" onAction="#deleteMaterialItem" prefHeight="30.0" prefWidth="59.0"  text="-">
+                     <styleClass>
+                        <String fx:value="btn_form" />
+                        <String fx:value="add_material_btn" />
+                     </styleClass>
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="delete_additive_button" layoutX="372.0" layoutY="400.0" minWidth="24.0" mnemonicParsing="false" onAction="#deleteAdditiveItem" prefHeight="30.0" prefWidth="59.0" text="-">
+                     <styleClass>
+                        <String fx:value="btn_form" />
+                        <String fx:value="add_material_btn" />
+                     </styleClass>
+                  </Button>
                     </children>
                 </AnchorPane>
             </content>
@@ -122,7 +149,7 @@
                         <Button layoutX="897.0" layoutY="647.0" mnemonicParsing="false" onAction="#deleteItemTable" prefHeight="34.0" prefWidth="101.0" styleClass="btn_form" text="Удалить" />
                         <Button layoutX="764.0" layoutY="647.0" mnemonicParsing="false" onAction="#updateItemTable" prefHeight="34.0" prefWidth="119.0" styleClass="btn_form" text="Изменить" />
                   <TextField fx:id="filterMaterial" layoutX="191.0" layoutY="30.0" prefHeight="26.0" prefWidth="220.0" promptText="Материал" />
-                  <TextField fx:id="filterAdditive" layoutX="437.0" layoutY="30.0" onMouseEntered="#filterDataTable" prefHeight="38.0" prefWidth="248.0" promptText="Добавка" />
+                  <TextField fx:id="filterAdditive" layoutX="437.0" layoutY="30.0" prefHeight="38.0" prefWidth="248.0" promptText="Добавка" />
                   <Button layoutX="33.0" layoutY="647.0" mnemonicParsing="false" onMouseClicked="#clickResetFilter" prefHeight="34.0" prefWidth="136.0" styleClass="btn_form" text="Обновить" />
                     </children>
                 </AnchorPane>
@@ -130,7 +157,10 @@
         </Tab>
         <Tab text="Отчет">
             <content>
-                <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="body-form" stylesheets="@style/form-style.css">
+               <children>
+                  <Button fx:id="btn_save_report" layoutX="48.0" layoutY="38.0" mnemonicParsing="false" onMouseClicked="#downReport" prefHeight="38.0" prefWidth="184.0" styleClass="btn_form" text="Сформировать" />
+               </children></AnchorPane>
             </content>
         </Tab>
     </tabs>

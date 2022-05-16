@@ -14,7 +14,6 @@ public class MainApplication extends Application {
     public void start(Stage primeStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("main-view.fxml"));
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(getClass().getResource("style/form-style.css").toExternalForm());
         Stage stage = new Stage();
         stage.setResizable(false);
         stage.setScene(scene);

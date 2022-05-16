@@ -112,6 +112,7 @@ public class MaterialService extends SuperService{
         }
         return material;
     }
+
     public Material getMaterialById(Integer id) {
         Material material = null;
         connect = ConnectorDB();
@@ -141,4 +142,34 @@ public class MaterialService extends SuperService{
         }
         return material;
     }
+    public Map.Entry<Boolean,String> deleteMaterialByName(String name) {
+        Map.Entry<Boolean, String> response = Map.entry(false, "Произошла ошибка при удалении материала");
+        connect = ConnectorDB();
+        String query = "DELETE FROM material where name = ?";
+        try {
+            preparedStatement = connect.prepareStatement(query);
+            preparedStatement.setString(1, name);
+            int result = preparedStatement.executeUpdate();
+
+            if (result == 1) {
+                response = Map.entry(true, "Материал удален");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            modalWindow.showError(e);
+        }finally {
+            if (connect != null) {
+                try {
+                    connect.close();
+                    preparedStatement.close();
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    modalWindow.showError(e);
+                }
+            }
+        }
+        return response;
+    }
+
 }

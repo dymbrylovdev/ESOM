@@ -8,16 +8,19 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Objects;
 
 public class CreateFileImg {
-
     public Map.Entry<Boolean, String> saveImgInFolder(String path)  {
         Map.Entry result = Map.entry(false, "");
-//        String parent = MainController.class.getResource("").getPath();
         String parent = System.getProperty("user.dir");
         BufferedImage bImage = null;
         try {
             File initialImage = new File(path);
+            String parentPath = initialImage.getParentFile().getParentFile().toString().substring(6);
+            if (Objects.equals(parent, parentPath)) {
+                return result = Map.entry(true, initialImage.toString().substring(6));
+            };
             bImage = ImageIO.read(initialImage);
             File newFile = getUniqueFilePath(parent, "img", initialImage.getName());
             Boolean resultSave = ImageIO.write(bImage, "png", newFile);
@@ -66,8 +69,5 @@ public class CreateFileImg {
         return fileName.substring(0, fileName.lastIndexOf('.'));
     }
 
-    public Image getImgForPath(String path) {
-        Image img = new Image(path);
-        return img;
-    }
+
 }

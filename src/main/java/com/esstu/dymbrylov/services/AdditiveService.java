@@ -2,7 +2,6 @@ package com.esstu.dymbrylov.services;
 
 import com.esstu.dymbrylov.controllers.ModalController;
 import com.esstu.dymbrylov.model.Additive;
-import com.esstu.dymbrylov.model.Material;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -93,7 +92,7 @@ public class AdditiveService extends SuperService {
     public Additive getAdditiveByName(String name) {
         Additive additive = null;
         connect = ConnectorDB();
-        String query = "SELECT * from additive where name = ?";
+        String query = "SELECT * FROM additive WHERE name = ?";
         try {
             preparedStatement = connect.prepareStatement(query);
             preparedStatement.setString(1, name);
@@ -121,7 +120,7 @@ public class AdditiveService extends SuperService {
     public Additive getAdditiveById(Integer id) {
         Additive additive = null;
         connect = ConnectorDB();
-        String query = "SELECT * from additive where id = ?";
+        String query = "SELECT * FROM additive WHERE id = ?";
         try {
             preparedStatement = connect.prepareStatement(query);
             preparedStatement.setInt(1, id);
@@ -144,5 +143,35 @@ public class AdditiveService extends SuperService {
             }
         }
         return additive;
+    }
+
+    public Map.Entry<Boolean,String> deleteAdditiveByName(String name) {
+        Map.Entry<Boolean, String> response = Map.entry(false, "Произошла ошибка при удалении добавки");
+        connect = ConnectorDB();
+        String query = "DELETE FROM additive WHERE name = ?";
+        try {
+            preparedStatement = connect.prepareStatement(query);
+            preparedStatement.setString(1, name);
+            int result = preparedStatement.executeUpdate();
+
+            if (result == 1) {
+                response = Map.entry(true, "Доюавка удалена");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            modalWindow.showError(e);
+        }finally {
+            if (connect != null) {
+                try {
+                    connect.close();
+                    preparedStatement.close();
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    modalWindow.showError(e);
+                }
+            }
+        }
+        return response;
     }
 }
