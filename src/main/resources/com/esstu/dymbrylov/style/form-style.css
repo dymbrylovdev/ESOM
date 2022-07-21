@@ -12,25 +12,20 @@
     -fx-cursor: hand;
 }
 
-
-
 .button {
     -fx-background-color: transparent;
     -fx-font-family: "Roboto Thin";
     -fx-font-size: 16px;
-    /*-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 10, 0, 0, 0);*/
     -fx-border-radius: 5;
     -fx-graphic-text-gap: 0;
-
 }
 
 .button:hover{
-    /*-fx-background-color: linear-gradient(to right bottom, #de2c59, #1e3ad3);*/
     -fx-text-fill: #fff;
 }
+
 .arrow-button {
 }
-
 
 .arrow {
     -fx-background-color: #445877;
@@ -42,15 +37,11 @@
 
 .text-field {
     -fx-border-radius: 4px;
-    /*-fx-border-color: linear-gradient(to right bottom,#CD3C61,#334AC5);*/
     -fx-pref-height: 30px;
 }
-.text-field:hover {
-    /*-fx-border-color: linear-gradient(to right bottom,#334AC5,#CD3C61);*/
-}
+
 .text-field .text {
     -fx-font-family: "Roboto Thin";
-    /*-fx-fill: #334AC5;*/
 }
 
 .combo-box{
@@ -60,6 +51,7 @@
     -fx-font-size: 16px;
     -fx-text-fill: #445877;
 }
+
 .combo-box .text{
     -fx-fill: #445877;
 }
@@ -68,10 +60,12 @@
     -fx-border-width: 2;
     -fx-text-fill: #eaeaea;
 }
+
 .first-title-pane .title .text{
     -fx-fill: #445877;
     -fx-font-size: 14px;
 }
+
 .title-pane .title {
     -fx-border-width: 2;
     -fx-font-family: "Roboto Thin";
@@ -82,23 +76,22 @@
     -fx-font-family: "Roboto Thin";
     -fx-font-size: 14px;
 }
+
 .btn_form {
     -fx-border-color: #fff;
     -fx-text-fill: #fff;
 }
 
-
 .btn_form:hover {
     -fx-border-color: none;
     -fx-background-color: #fff;
     -fx-text-fill: #445877;
-
 }
-
 
 .focus-indicator {
     -fx-text-fill: #fff;
 }
+
 .label-form {
     -fx-font-family: "Roboto Thin";
     -fx-font-size: 15px;

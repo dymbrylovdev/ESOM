@@ -67,9 +67,9 @@
                                 </TitledPane>
                             </panes>
                         </Accordion>
-                        <TextField fx:id="id" layoutX="34.0" layoutY="26.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="230.0" promptText="Номер образца" styleClass="text-field_all_style" stylesheets="@style/form-style.css" />
-                        <TextField fx:id="layer_count" layoutX="34.0" layoutY="99.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="230.0" promptText="Количество слоев" stylesheets="@style/form-style.css" />
-                        <TextField fx:id="percent" layoutX="34.0" layoutY="174.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="230.0" promptText="Процент содержания" stylesheets="@style/form-style.css" />
+                        <TextField fx:id="id" layoutX="34.0" layoutY="77.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="230.0" promptText="Номер образца" styleClass="text-field_all_style" stylesheets="@style/form-style.css" />
+                        <TextField fx:id="layer_count" layoutX="34.0" layoutY="148.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="230.0" promptText="Количество слоев" stylesheets="@style/form-style.css" />
+                        <TextField fx:id="percent" layoutX="34.0" layoutY="219.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="230.0" promptText="Процент содержания" stylesheets="@style/form-style.css" />
                         <ComboBox fx:id="material_select" layoutX="34.0" layoutY="308.0" prefHeight="26.0" prefWidth="230.0" promptText="Выбирите материал" styleClass="combo-box" stylesheets="@style/form-style.css" />
                         <Button fx:id="save_form" layoutX="877.0" layoutY="620.0" mnemonicParsing="false" onMouseClicked="#clickBtnSaveForm" prefHeight="50.0" prefWidth="121.0" styleClass="btn_form" stylesheets="@style/form-style.css" text="Сохранить" />
                         <Button fx:id="add_material_button" layoutX="294.0" layoutY="306.0" minWidth="24.0" mnemonicParsing="false" onAction="#clickBtnAddMaterial" prefHeight="30.0" prefWidth="59.0" text="+">
@@ -106,7 +106,7 @@
                      </styleClass></Button>
                   <Label alignment="CENTER" layoutX="34.0" layoutY="364.0" prefHeight="39.0" prefWidth="71.0" styleClass="label-form" text="Добавка: " />
                   <Label alignment="CENTER" layoutX="34.0" layoutY="268.0" prefHeight="39.0" prefWidth="79.0" styleClass="label-form" text="Материал: " />
-                  <Button fx:id="delete_material_button" layoutX="372.0" layoutY="306.0" minWidth="24.0" mnemonicParsing="false" onAction="#deleteMaterialItem" prefHeight="30.0" prefWidth="59.0"  text="-">
+                  <Button fx:id="delete_material_button" layoutX="372.0" layoutY="306.0" minWidth="24.0" mnemonicParsing="false" onAction="#deleteMaterialItem" prefHeight="30.0" prefWidth="59.0" text="-">
                      <styleClass>
                         <String fx:value="btn_form" />
                         <String fx:value="add_material_btn" />
@@ -121,6 +121,9 @@
                         <String fx:value="add_material_btn" />
                      </styleClass>
                   </Button>
+                  <Label alignment="CENTER" layoutX="34.0" layoutY="179.0" prefHeight="39.0" prefWidth="158.0" styleClass="label-form" text="Процент содержания:" />
+                  <Label alignment="CENTER" layoutX="34.0" layoutY="108.0" prefHeight="39.0" prefWidth="137.0" styleClass="label-form" text="Количество слоев:" />
+                  <Label alignment="CENTER" layoutX="34.0" layoutY="37.0" prefHeight="39.0" prefWidth="120.0" styleClass="label-form" text="Номер образца:" />
                     </children>
                 </AnchorPane>
             </content>
@@ -138,12 +141,12 @@
                                 <TableColumn fx:id="id_table" prefWidth="124.0" text="Номер образца" />
                                 <TableColumn fx:id="id_material_table" minWidth="0.0" prefWidth="195.0" text="Материал" />
                                 <TableColumn fx:id="id_additive_table" minWidth="0.0" prefWidth="230.0" text="Добавка" />
-                                <TableColumn fx:id="layer_count_table" minWidth="0.0" prefWidth="116.0" text="Слои" />
-                                <TableColumn fx:id="percent_table" minWidth="0.0" prefWidth="233.0" text="Процент содержания" />
-                                <TableColumn fx:id="photoAfter" minWidth="0.0" prefWidth="233.0" text="Фото" />
-                                <TableColumn fx:id="photoBefore" minWidth="0.0" prefWidth="233.0" text="Фото" />
-                                <TableColumn fx:id="photoAfterTest" minWidth="0.0" prefWidth="233.0" text="Фото" />
-                                <TableColumn fx:id="photoReverse" minWidth="0.0" prefWidth="233.0" text="Фото" />
+                                <TableColumn fx:id="layer_count_table" minWidth="0.0" prefWidth="155.199951171875" text="Слои" />
+                                <TableColumn fx:id="percent_table" minWidth="0.0" prefWidth="194.4000244140625" text="Процент содержания" />
+                                <TableColumn fx:id="photoAfter" minWidth="0.0" prefWidth="233.0" text="Фото после испытания" />
+                                <TableColumn fx:id="photoBefore" minWidth="0.0" prefWidth="233.0" text="Фото до испытания " />
+                                <TableColumn fx:id="photoAfterTest" minWidth="0.0" prefWidth="233.0" text="Фото после испытания на прочность" />
+                                <TableColumn fx:id="photoReverse" minWidth="0.0" prefWidth="233.0" text="Фото обратной стороны" />
                             </columns>
                         </TableView>
                         <Button layoutX="897.0" layoutY="647.0" mnemonicParsing="false" onAction="#deleteItemTable" prefHeight="34.0" prefWidth="101.0" styleClass="btn_form" text="Удалить" />

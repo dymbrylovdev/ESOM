@@ -26,15 +26,14 @@ import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import net.sf.jasperreports.components.barcode4j.BarcodeUtils;
 import net.sf.jasperreports.engine.*;
 ;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.swing.JRViewer;
+import net.sf.jasperreports.engine.fill.JRFileVirtualizer;
 import net.sf.jasperreports.view.JasperViewer;
 
 import java.io.*;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.*;
 
 public class MainController extends MainService implements Initializable {
@@ -310,27 +309,29 @@ public class MainController extends MainService implements Initializable {
     }
 
     // Уаление аэлементов из таблицы материалов
-    public void  deleteMaterialItem () {
-       String item = material_select.getSelectionModel().getSelectedItem();
+    public void deleteMaterialItem() {
+        String item = material_select.getSelectionModel().getSelectedItem();
         Map.Entry<Boolean, String> res = materialController.deleteMaterialByName(item);
         if (res.getKey()) {
             modalWindow.showAlertInformation(res.getValue());
-        }else{
+        } else {
             modalWindow.showAlertWarning(res.getValue());
         }
         setListMaterial();
+        setDataInTable();
     }
 
     // Уаление аэлементов из таблицы материалов
-    public void  deleteAdditiveItem () {
+    public void deleteAdditiveItem() {
         String item = additive_select.getSelectionModel().getSelectedItem();
         Map.Entry<Boolean, String> res = additiveController.deleteAdditiveByName(item);
         if (res.getKey()) {
             modalWindow.showAlertInformation(res.getValue());
-        }else{
+        } else {
             modalWindow.showAlertWarning(res.getValue());
         }
         setListAdditive();
+        setDataInTable();
     }
 
     //=========================================================================================================================
@@ -480,10 +481,18 @@ public class MainController extends MainService implements Initializable {
     public void downReport() {
 
         try {
-            String parent = System.getProperty("user.dir")+"/report/mainReport.jrxml";
-
+            String parent = System.getProperty("user.dir") + "/report/mainReport.jrxml";
+            final File dir = new File("C://temp");
+            List list = getAllSamplesFromJasper();
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
             JasperReport jasperReport = JasperCompileManager.compileReport(parent);
-            JasperPrint print = JasperFillManager.fillReport(jasperReport, null, ConnectorDB());
+            JRFileVirtualizer virtualizer = new JRFileVirtualizer(5000, dir.getAbsolutePath());
+            HashMap<String, Object> reportParametersMap = new HashMap<String, Object>();
+
+            reportParametersMap.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
+            JasperPrint print = JasperFillManager.fillReport(jasperReport, reportParametersMap, ConnectorDB());
             JasperViewer.viewReport(print, false);
         } catch (JRException e) {
             e.printStackTrace();
@@ -514,11 +523,6 @@ public class MainController extends MainService implements Initializable {
         setListMaterial();
         setListAdditive();
         formTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        String res = getClass().getResource("imges").toExternalForm();
-        BackgroundImage myBI= new BackgroundImage(new Image(res+"/plus-solid.svg",32,32,false,true),
-                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                BackgroundSize.DEFAULT);
-        button_img_1.getStyleClass().add("icon-button");
 
         if (materialController.ConnectorDB() != null) {
             bdInfo.setText("База данных подключена");

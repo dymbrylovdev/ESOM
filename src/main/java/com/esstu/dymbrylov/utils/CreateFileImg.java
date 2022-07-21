@@ -1,8 +1,5 @@
 package com.esstu.dymbrylov.utils;
 
-
-import javafx.scene.image.Image;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -14,6 +11,9 @@ public class CreateFileImg {
     public Map.Entry<Boolean, String> saveImgInFolder(String path)  {
         Map.Entry result = Map.entry(false, "");
         String parent = System.getProperty("user.dir");
+        if(path != null) {
+            path = path.replace("%20", " ");
+        }
         BufferedImage bImage = null;
         try {
             File initialImage = new File(path);
@@ -41,6 +41,7 @@ public class CreateFileImg {
     }
 
     public static String getUniqueFileName(String parent, String child, String fileName) {
+
         final File dir = new File(parent, child);
         if (!dir.exists()) {
             dir.mkdirs();

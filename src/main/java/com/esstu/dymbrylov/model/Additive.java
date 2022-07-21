@@ -1,7 +1,6 @@
 package com.esstu.dymbrylov.model;
 
 public class Additive {
-
     private final Integer id;
     private final String name;
 

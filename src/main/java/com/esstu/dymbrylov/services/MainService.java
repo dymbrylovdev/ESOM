@@ -2,7 +2,9 @@ package com.esstu.dymbrylov.services;
 
 import com.esstu.dymbrylov.controllers.ModalController;
 import com.esstu.dymbrylov.DataTable;
+import com.esstu.dymbrylov.model.Material;
 import com.esstu.dymbrylov.model.Samples;
+import com.esstu.dymbrylov.model.SamplesReport;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
@@ -13,8 +15,7 @@ import java.net.MalformedURLException;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 
 public class MainService extends SuperService {
@@ -27,17 +28,6 @@ public class MainService extends SuperService {
     protected static Statement statement;
     protected static ResultSet resultSet;
 
-    public Connection ConnectorDB() {
-        try {
-            connect = DriverManager.getConnection("jdbc:sqlite:maindb.sqlite");
-        } catch (Exception e) {
-            Logger.getAnonymousLogger().log(Level.SEVERE,
-                    LocalDateTime.now() + ": Could not connect to SQLite DB at ");
-            modalWindow.showError(e);
-            return null;
-        }
-        return connect;
-    }
 
     public Map.Entry<Boolean, String> saveFormData(Samples samples) {
         Map.Entry<Boolean, String> response = Map.entry(false, "Произошла ошибка при сохранении образца");
@@ -299,8 +289,15 @@ public class MainService extends SuperService {
             resultSet = preparedStatement.executeQuery();
             count = resultSet.getInt(1);
         } catch (SQLException e) {
-            e.printStackTrace();
-            modalWindow.showError(e);
+            try {
+                String query2 = "create table samples (id text not null constraint samples_pk primary key, id_material integer REFERENCES material(id), id_additive integer REFERENCES additive(id), layer_count text, percent text, photo_after text, photo_before text, photo_after_test text, photo_reverse text);";
+                connect = ConnectorDB();
+                preparedStatement = connect.prepareStatement(query2);
+                preparedStatement.executeUpdate();
+            }catch (SQLException err) {
+                e.printStackTrace();
+                modalWindow.showError(e);
+            }
         } finally {
             if (connect != null) {
                 try {
@@ -349,5 +346,66 @@ public class MainService extends SuperService {
         view.setFitHeight(200);
         view.setFitWidth(200);
         return view;
+    }
+
+    public List<Object> getAllSamplesFromJasper() {
+        List<Object> list = new ArrayList();
+        connect = ConnectorDB();
+        try {
+            String sql = "select *, additive.name as name_additive, material.name as name_material from samples as s LEFT JOIN additive  ON additive.id  = s.id_additive LEFT JOIN material  ON material.id  = s.id_material";
+            preparedStatement = connect.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Integer id = resultSet.getInt("id");
+                String name_material = resultSet.getString("name_material");
+                String name_additive = resultSet.getString("name_additive");
+                String layer_count = resultSet.getString("layer_count");
+                String percent = resultSet.getString("percent");
+                String photo_after = resultSet.getString("photo_after");
+                String photo_before = resultSet.getString("photo_before");
+                String photo_after_test = resultSet.getString("photo_after_test");
+                String photo_reverse = resultSet.getString("photo_reverse");
+
+                SamplesReport material = new SamplesReport(id, name_material, name_additive,
+                        layer_count,percent,photo_after,photo_before,photo_after_test,photo_reverse);
+                list.add(material);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            modalWindow.showError(e);
+        } finally {
+            if (connect != null) {
+                try {
+                    connect.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    modalWindow.showError(e);
+                }
+            }
+        }
+        return list;
+    }
+
+
+    public void updateDataMaterial() {
+        connect = ConnectorDB();
+        int count = 0;
+        try {
+            String query = "UPDATE samples SET id_material = NULL WHERE id_material = ?;";
+            preparedStatement = connect.prepareStatement(query);
+            preparedStatement.executeQuery();
+        } catch (SQLException e) {
+                e.printStackTrace();
+                modalWindow.showError(e);
+        } finally {
+            if (connect != null) {
+                try {
+                    connect.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    modalWindow.showError(e);
+                }
+            }
+        }
     }
 }

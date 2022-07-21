@@ -13,7 +13,10 @@ public class Samples {
     private final String photo_after_test;
     private final String photo_reverse;
 
-    public Samples(String id, Integer id_material, Integer id_additive, String layer_count, String percent, String photo_after, String photo_before, String photo_after_test, String photo_reverse) {
+    public Samples(String id, Integer id_material,
+                   Integer id_additive, String layer_count,
+                   String percent, String photo_after, String photo_before,
+                   String photo_after_test, String photo_reverse) {
         this.id = id;
         this.id_material = id_material;
         this.id_additive = id_additive;

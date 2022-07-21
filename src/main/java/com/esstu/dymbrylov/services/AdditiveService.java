@@ -97,13 +97,19 @@ public class AdditiveService extends SuperService {
             preparedStatement = connect.prepareStatement(query);
             preparedStatement.setString(1, name);
             resultSet = preparedStatement.executeQuery();
-
             if (resultSet.next()) {
                 additive = new Additive(resultSet.getInt("id"), resultSet.getString("name"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            modalWindow.showError(e);
+            try {
+                String query2 = "create table additive (id integer not null constraint additive_pk primary key autoincrement, name text not null);";
+                connect = ConnectorDB();
+                preparedStatement = connect.prepareStatement(query2);
+                preparedStatement.executeUpdate();
+            }catch (SQLException err) {
+                e.printStackTrace();
+                modalWindow.showError(e);
+            }
         } finally {
             if (connect != null) {
                 try {
@@ -146,6 +152,7 @@ public class AdditiveService extends SuperService {
     }
 
     public Map.Entry<Boolean,String> deleteAdditiveByName(String name) {
+        Additive additive = getAdditiveByName(name);
         Map.Entry<Boolean, String> response = Map.entry(false, "Произошла ошибка при удалении добавки");
         connect = ConnectorDB();
         String query = "DELETE FROM additive WHERE name = ?";
@@ -153,7 +160,14 @@ public class AdditiveService extends SuperService {
             preparedStatement = connect.prepareStatement(query);
             preparedStatement.setString(1, name);
             int result = preparedStatement.executeUpdate();
-
+            connect.close();
+            connect = ConnectorDB();
+            preparedStatement.close();
+            resultSet.close();
+            String query2 = "UPDATE samples SET id_additive = NULL WHERE id_additive = ?;";
+            preparedStatement = connect.prepareStatement(query2);
+            preparedStatement.setInt(1, additive.getId());
+            preparedStatement.executeUpdate();
             if (result == 1) {
                 response = Map.entry(true, "Доюавка удалена");
             }

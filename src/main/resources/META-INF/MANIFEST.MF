@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Main-Class: com.esstu.dymbrylov.App
+Class-Path: lib\jackson-dataformat-xml-2.13.1.jar lib\javafx-base-11.0.2
+ .jar lib\bcprov-jdk15on-1.68.jar lib\commons-collections4-4.2.jar lib\j
+ freechart-1.0.19.jar lib\javafx-base-11.0.2-win.jar lib\jackson-core-2.
+ 13.1.jar lib\javafx-fxml-11.0.2.jar lib\jackson-databind-2.13.1.jar lib
+ \woodstox-core-6.2.7.jar lib\javafx-controls-11.0.2-win.jar lib\sqlite-
+ jdbc-3.36.0.jar lib\ecj-3.21.0.jar lib\commons-digester-2.1.jar lib\jco
+ mmon-1.0.23.jar lib\jackson-annotations-2.13.1.jar lib\jfoenix-9.0.1.ja
+ r lib\javafx-graphics-11.0.2.jar lib\commons-collections-3.2.2.jar lib\
+ javafx-fxml-11.0.2-win.jar lib\commons-logging-1.1.1.jar lib\stax2-api-
+ 4.2.1.jar lib\javafx-controls-11.0.2.jar lib\javafx-graphics-11.0.2-win
+ .jar lib\itext-2.1.7.js9.jar lib\commons-beanutils-1.9.4.jar lib\jasper
+ reports-6.19.1.jar
+

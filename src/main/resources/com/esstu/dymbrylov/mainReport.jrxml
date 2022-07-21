@@ -9,7 +9,7 @@
 LEFT JOIN additive  ON additive.id  = s.id_additive
 LEFT JOIN material  ON material.id  = s.id_material]]>
 	</queryString>
-	<field name="id" class="java.lang.Object">
+	<field name="id" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.name" value="id"/>
 		<property name="com.jaspersoft.studio.field.label" value="id"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="samples"/>
@@ -84,11 +84,11 @@ LEFT JOIN material  ON material.id  = s.id_material]]>
 	<title>
 		<band height="126" splitType="Stretch">
 			<staticText>
-				<reportElement x="164" y="0" width="628" height="126" uuid="e0098c61-2235-4079-8af1-631946f7f07b"/>
-				<textElement verticalAlignment="Middle">
-					<font size="40"/>
+				<reportElement x="0" y="0" width="799" height="126" uuid="c6dcc8f3-f0f1-408c-9067-3d0d67a1e80b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+					<font fontName="Times New Roman" size="26"/>
 				</textElement>
-				<text><![CDATA[Отчет образцов композиционных материалов]]></text>
+				<text><![CDATA[Отчет по образцам композиционных материалов]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -108,7 +108,7 @@ LEFT JOIN material  ON material.id  = s.id_material]]>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font fontName="Times New Roman" size="14"/>
 				</textElement>
 				<text><![CDATA[Процент содержания]]></text>
 			</staticText>
@@ -123,7 +123,7 @@ LEFT JOIN material  ON material.id  = s.id_material]]>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font fontName="Times New Roman" size="14"/>
 				</textElement>
 				<text><![CDATA[Слои]]></text>
 			</staticText>
@@ -139,13 +139,14 @@ LEFT JOIN material  ON material.id  = s.id_material]]>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font fontName="Times New Roman" size="14"/>
 				</textElement>
 				<text><![CDATA[Добавка]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="580" y="0" width="90" height="60" forecolor="#757572" uuid="f12af730-d614-40bf-962f-d4b2d6a061e9">
+				<reportElement x="600" y="0" width="100" height="60" forecolor="#757572" uuid="f12af730-d614-40bf-962f-d4b2d6a061e9">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
@@ -154,7 +155,7 @@ LEFT JOIN material  ON material.id  = s.id_material]]>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font fontName="Times New Roman" size="14"/>
 				</textElement>
 				<text><![CDATA[Фото после испытания на прочность ]]></text>
 			</staticText>
@@ -169,13 +170,12 @@ LEFT JOIN material  ON material.id  = s.id_material]]>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font fontName="Times New Roman" size="14"/>
 				</textElement>
 				<text><![CDATA[Номер образца]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="670" y="0" width="90" height="60" forecolor="#757572" uuid="e9ab6910-9253-49ae-bb7e-bfe074af3a97">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<reportElement x="700" y="0" width="100" height="60" forecolor="#757572" uuid="e9ab6910-9253-49ae-bb7e-bfe074af3a97">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -185,13 +185,14 @@ LEFT JOIN material  ON material.id  = s.id_material]]>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font fontName="Times New Roman" size="14"/>
 				</textElement>
 				<text><![CDATA[Фото обратной стороны]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="490" y="0" width="90" height="60" forecolor="#757572" uuid="8957e675-4271-46fa-a3cb-f7a5d0c10b60">
+				<reportElement x="500" y="0" width="100" height="60" forecolor="#757572" uuid="8957e675-4271-46fa-a3cb-f7a5d0c10b60">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
@@ -200,13 +201,14 @@ LEFT JOIN material  ON material.id  = s.id_material]]>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font fontName="Times New Roman" size="14"/>
 				</textElement>
 				<text><![CDATA[Фото до испытания]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="400" y="0" width="90" height="60" forecolor="#757572" uuid="894d51fa-c4d0-4201-86c5-8e7df0623f0c">
+				<reportElement x="400" y="0" width="100" height="60" forecolor="#757572" uuid="894d51fa-c4d0-4201-86c5-8e7df0623f0c">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
@@ -215,7 +217,7 @@ LEFT JOIN material  ON material.id  = s.id_material]]>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font fontName="Times New Roman" size="14"/>
 				</textElement>
 				<text><![CDATA[Фото после испытания]]></text>
 			</staticText>
@@ -230,7 +232,7 @@ LEFT JOIN material  ON material.id  = s.id_material]]>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#757572"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font fontName="Times New Roman" size="14"/>
 				</textElement>
 				<text><![CDATA[Материал]]></text>
 			</staticText>
@@ -247,7 +249,7 @@ LEFT JOIN material  ON material.id  = s.id_material]]>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font isBold="true"/>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{name_additive}]]></textFieldExpression>
 			</textField>
@@ -260,7 +262,7 @@ LEFT JOIN material  ON material.id  = s.id_material]]>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font isBold="true"/>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{name_material}]]></textFieldExpression>
 			</textField>
@@ -273,7 +275,7 @@ LEFT JOIN material  ON material.id  = s.id_material]]>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font isBold="true"/>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{layer_count}]]></textFieldExpression>
 			</textField>
@@ -286,7 +288,7 @@ LEFT JOIN material  ON material.id  = s.id_material]]>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font isBold="true"/>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{percent}]]></textFieldExpression>
 			</textField>
@@ -299,13 +301,12 @@ LEFT JOIN material  ON material.id  = s.id_material]]>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#736343"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font isBold="true"/>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
 			<image scaleImage="FillFrame" isLazy="true">
-				<reportElement x="400" y="0" width="90" height="100" uuid="a8657f0f-63b1-411d-b7da-68d7b69137e1">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<reportElement x="400" y="0" width="100" height="100" uuid="a8657f0f-63b1-411d-b7da-68d7b69137e1">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -317,8 +318,7 @@ LEFT JOIN material  ON material.id  = s.id_material]]>
 				<imageExpression><![CDATA[$F{photo_after}.toString()]]></imageExpression>
 			</image>
 			<image scaleImage="FillFrame" isLazy="true">
-				<reportElement x="490" y="0" width="90" height="100" uuid="034c5ba4-85be-478d-b941-70b98f57f76e">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<reportElement x="500" y="0" width="100" height="100" uuid="034c5ba4-85be-478d-b941-70b98f57f76e">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -330,7 +330,7 @@ LEFT JOIN material  ON material.id  = s.id_material]]>
 				<imageExpression><![CDATA[$F{photo_before}.toString()]]></imageExpression>
 			</image>
 			<image scaleImage="FillFrame" isLazy="true">
-				<reportElement x="580" y="0" width="90" height="100" uuid="8993fd34-4ef6-4ae3-a35c-48ea55607f26">
+				<reportElement x="600" y="0" width="100" height="100" uuid="8993fd34-4ef6-4ae3-a35c-48ea55607f26">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -343,8 +343,7 @@ LEFT JOIN material  ON material.id  = s.id_material]]>
 				<imageExpression><![CDATA[$F{photo_after_test}.toString()]]></imageExpression>
 			</image>
 			<image scaleImage="FillFrame" isLazy="true">
-				<reportElement x="670" y="0" width="90" height="100" uuid="d783a0f9-a9b9-442d-8a25-0297f1f83b70">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<reportElement x="700" y="0" width="100" height="100" uuid="d783a0f9-a9b9-442d-8a25-0297f1f83b70">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
